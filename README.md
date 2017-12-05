@@ -7,7 +7,7 @@ Our members are:
   * **Davidbond813**
   * **Regina M**
   * **Slacker-Alt**
-  * **Tony Whomever**
+  * [**Tony Whomever**](https://github.com/Soupedenuit)
  
  Our goal is to work together as a remote team and build an **employee scheduling application**
  
