@@ -1,14 +1,13 @@
-# geckos-06
-<h1>This is a Chingu-Voyage 3 Repository</h1>
-<h2>We are a 4-member tier 2 team</h2>
+# We are geckos-06
+
+## Welcome to our team!
 
 Our members are:
-<ul>
-  <li>Davidbond813</li>
-  <li>Regina M</li>
-  <li>Slacker-Alt</li>
-  <li>Tony Whomever</li>
- </ul>
+
+  * **Davidbond813**
+  * **Regina M**
+  * **Slacker-Alt**
+  * **Tony Whomever**
  
  Our project is: an employee scheduling application
  
