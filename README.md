@@ -1,4 +1,4 @@
-# We are geckos-06
+# Chingu Voyage 3 Team:  geckos-06
 
 ## Welcome to our team!
 
@@ -9,11 +9,26 @@ Our members are:
   * **Slacker-Alt**
   * **Tony Whomever**
  
- Our project is: an employee scheduling application
+ Our goal is to work together as a remote team and build an **employee scheduling application**
  
- <ins>Timeline</ins>
+ <ins>**Application summary:**</ins><br />
+ An application to easily generate a part-time employee schedule based on employees' availability and needs of business.
+ This application could be useful not only to employers but to anyone organizing a schedule for a group of people (i.e. volunteers).
  
-  Day 1 (Dec 1): launch day!<br />
+ <ins>**Project User Story**</ins>
+ * user can add a list of employee names
+ * user can indicate business hours for each day of the week
+ * user can indicate number of employees required at once
+ * user can indicate min/max number of shifts per employee
+ * user can indicate length of shifts
+ * user can indicate length of breaks
+ * user can indicate min/max hours per employee per day/week
+ * once all required parameters are entered, the app will make an employee schedule for one week
+ 
+  
+ <ins>**Timeline**</ins>
+ 
+  Day 1 (Dec 1):  launch day!<br />
   Week 1 (Dec 2 - Dec 8): Act 1 Project Setup Milestones
 
     1: Everyone has met each other and read each other’s bios
@@ -30,5 +45,5 @@ Our members are:
   Week 6 (Jan 6 - Jan 12):<br />
   Week 7 (Jan 13 - Jan 19):<br />
   
-  _DUE DATE: JANUARY 20th 2018_
+  **LAUNCH DATE: JANUARY 20th 2018**
   
