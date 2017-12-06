@@ -4,8 +4,8 @@
 
 Our members are:
 
-  * **Davidbond813**
-  * **Regina M**
+  * **Regina M** (Project Manager)
+  * **Davidbond813**  
   * **Slacker-Alt**
   * [**Tony Whomever**](https://github.com/Soupedenuit)
  
@@ -29,6 +29,7 @@ Our members are:
  <ins>**Timeline**</ins>
  
   Day 1 (Dec 1):  launch day!<br />
+  
   Week 1 (Dec 2 - Dec 8): Act 1 Project Setup Milestones
   
   1. Everyone has met each other and read each other’s bios - *DONE*
