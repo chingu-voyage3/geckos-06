@@ -1,6 +1,6 @@
 body {
   font-family: 'Open Sans', Roboto, sans-serif;
-  /*height: 100vh;*/
+  height: 100vh;
   background-color: #3D6D99;
   color: #ccc;
 }
@@ -28,16 +28,22 @@ h1, h2 {
   justify-content: space-around;
 }
 
+#column-titles {
+margin-bottom: 10px;
+}
+
 #column-titles, #hours {
   font-size: 0.8em;
   text-align: center;
-  margin: 0;
 }
 
 #column-titles span {
   width: 14%;
   text-decoration: underline;
-  margin: 0;
+  /*margin: 0;*/
+}
+
+#hours {
 }
 
 #schedule-grid {
@@ -52,52 +58,96 @@ h1, h2 {
 }
 
 .col-day {
-  background-color: #00FFF1;
-  box-shadow: 0 4px 8px 2px rgba(0, 0, 0, 0.19), 0 6px 20px 2px rgba(0, 0, 0, 0.20);
+  border-right: 1px solid #aaa;
 }
 
 .time {
   border-bottom: 1px solid #aaa;
+  margin: 0;
+  padding: 0;
+  height: 7%;
+  vertical-align: bottom;
 }
 
-#day1 {
+.shift1 {
+  background-color: #ff9800;
+}
+
+.shift2 {
+  background-color: #78909c;
+  /*margin-left: 14%;*/
+}
+
+.shift3 {
+  background-color: #9c27b0;
+  /*margin-left: 28%;*/
+}
+
+.shift4 {
+  background-color: #ffeb3b;
+  /*margin-left: 42%;*/
+}
+
+.shift5 {
+  background-color: #00bcd4;
+  /*margin-left: 56%;*/
+}
+
+.shift6 {
+  background-color: #ff5722;
+  /*margin-left: 70%;*/
+}
+
+.shift7 {
+  background-color: #4caf50;
+  /*margin-left: 84%;*/
+}
+
+[class*="shift"] {
+  width: 12%;
+  float: left;
+  box-shadow: 0 2px 4px 1px rgba(0, 0, 0, 0.19), 0 3px 10px 1px rgba(0, 0, 0, 0.20);
+  margin: 2px 2px 0 0;
+}
+
+[id*="day"] .shift1 {
   position: relative;
-  top: 25%;
+  top: 0%;
   height: 50%;
 }
 
-#day2 {
+[id*="day"] .shift2 {
   position: relative;
   top: 50%;
-  height: 50%;
+  height: 40%;
 }
 
-#day3 {
+[id*="day"] .shift3 {
   position: relative;
   top: 40%;
   height: 25%;
 }
 
-#day4 {
+[id*="day"] .shift4 {
   position: relative;
   top: 10%;
   height: 60%;
 }
 
-#day5 {
+[id*="day"] .shift5 {
   position: relative;
   top: 60%;
   height: 30%;
 }
 
-#day6 {
+[id*="day"] .shift6 {
   position: relative;
-  top: 10%;
-  height: 55%;
+  top: 70%;
+  height: 30%;
 }
 
-#day7 {
+[id*="day"] .shift7 {
   position: relative;
-  top: ;
+  top: 25%;
   height: 50%;
 }
