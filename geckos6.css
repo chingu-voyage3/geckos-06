@@ -1,0 +1,103 @@
+body {
+  font-family: 'Open Sans', Roboto, sans-serif;
+  /*height: 100vh;*/
+  background-color: #3D6D99;
+  color: #ccc;
+}
+
+h1, h2 {
+  text-align: center;
+}
+
+#schedule {
+  background-color: #1475CC;
+  margin-top: 50px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 70%;
+  width: 80%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  box-shadow: 0 4px 8px 2px rgba(0, 0, 0, 0.19), 0 6px 20px 2px rgba(0, 0, 0, 0.20);
+}
+
+#column-titles, #schedule-grid {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+#column-titles, #hours {
+  font-size: 0.8em;
+  text-align: center;
+  margin: 0;
+}
+
+#column-titles span {
+  width: 14%;
+  text-decoration: underline;
+  margin: 0;
+}
+
+#schedule-grid {
+  box-sizing: border-box;
+  height: 90%;
+}
+
+.column {
+  width: 14%;
+  height: 100%;
+  margin: 5px;
+}
+
+.col-day {
+  background-color: #00FFF1;
+  box-shadow: 0 4px 8px 2px rgba(0, 0, 0, 0.19), 0 6px 20px 2px rgba(0, 0, 0, 0.20);
+}
+
+.time {
+  border-bottom: 1px solid #aaa;
+}
+
+#day1 {
+  position: relative;
+  top: 25%;
+  height: 50%;
+}
+
+#day2 {
+  position: relative;
+  top: 50%;
+  height: 50%;
+}
+
+#day3 {
+  position: relative;
+  top: 40%;
+  height: 25%;
+}
+
+#day4 {
+  position: relative;
+  top: 10%;
+  height: 60%;
+}
+
+#day5 {
+  position: relative;
+  top: 60%;
+  height: 30%;
+}
+
+#day6 {
+  position: relative;
+  top: 10%;
+  height: 55%;
+}
+
+#day7 {
+  position: relative;
+  top: ;
+  height: 50%;
+}
