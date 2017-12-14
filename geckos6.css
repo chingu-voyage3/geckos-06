@@ -1,0 +1,207 @@
+body {
+  font-family: 'Open Sans', Roboto, sans-serif;
+  height: 100vh;
+  background-color: #3D6D99;
+  color: #ccc;
+  margin: 0;
+}
+
+header {
+  height: 10%;
+  margin: 0;
+}
+
+h1, h2 {
+  text-align: center;
+  margin: 0;
+  font-size: 3vh;
+}
+
+#schedule {
+  display: flex;
+  flex-direction: row;
+  background-color: #1475CC;
+  /* margin-top: 50px; */
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  height: 85%;
+  width: 95%;
+  transform: translate(-50%, -55%);
+  -webkit-transform: translate(-50%, -50%);
+  box-shadow: 0 4px 8px 2px rgba(0, 0, 0, 0.19), 0 6px 20px 2px rgba(0, 0, 0, 0.20);
+  /* border: 1px solid #ccc; */
+}
+
+#left-legend {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 10%;
+  /* border: 1px solid #ccc; */
+}
+
+#upper-left-square {
+  height: 5%;
+  width: 100%;
+  /* border: 1px solid #ccc; */
+}
+
+#days-of-week {
+  display: flex;
+  flex-direction: column;
+  height: 95%;
+  width: 100%;
+  text-align: center;
+  justify-content: space-around; /*main-axis*/
+  align-items: center;
+  align-content: flex-start;
+  /* border: 1px solid #ccc; */
+}
+
+#schedule-grid {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 90%;
+  /* border: 1px solid #ccc; */
+}
+
+#column-titles {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  height: 4%;
+  width: 100%;
+  border-bottom: 1px solid #ccc;
+}
+
+#day-rows {
+  display: flex;
+  flex-direction: column;
+  height: 96%;
+  width: 100%;
+  /* border-bottom: 1px solid #ccc; */
+}
+
+#column-titles, #days-of-week {
+  font-size: 1vw;
+  text-align: center;
+}
+
+#days-of-week span {
+  width: 100px;
+  /* text-align: center; */
+  text-decoration: underline;
+  /*margin: 0;*/
+}
+
+#schedule-grid {
+  /* box-sizing: border-box; */
+}
+
+.row {
+  height: 14%;
+  width: 100%;
+  margin-top: 3px;
+  border-bottom: 1px solid #ccc;
+}
+
+.row-day {
+  /* border-right: 1px solid #aaa; */
+}
+
+.time {
+  /* border-bottom: 1px solid #aaa; */
+  margin: 0;
+  padding: 0;
+  /* height: 7%; */
+  /* vertical-align: bottom; */
+}
+
+.shift1 {
+  background-color: #ff9800;
+}
+
+.shift2 {
+  background-color: #78909c;
+  /*margin-left: 14%;*/
+}
+
+.shift3 {
+  background-color: #9c27b0;
+  /*margin-left: 28%;*/
+}
+
+.shift4 {
+  background-color: #ffeb3b;
+  /*margin-left: 42%;*/
+}
+
+.shift5 {
+  background-color: #00bcd4;
+  /*margin-left: 56%;*/
+}
+
+.shift6 {
+  background-color: #ff5722;
+  /*margin-left: 70%;*/
+}
+
+.shift7 {
+  background-color: #4caf50;
+  /*margin-left: 84%;*/
+}
+
+[class*="shift"] {
+  height: 12%; /* 1/7th */
+  /* float: left; */
+  box-shadow: 0 2px 4px 1px rgba(0, 0, 0, 0.19), 0 3px 10px 1px rgba(0, 0, 0, 0.20);
+  margin: 2px 2px 0 0;
+  font-size: 1vh;
+  font-weight: bold;
+  color: black;
+  padding-left: 5px;
+}
+
+[id*="day"] .shift1 {
+  position: relative;
+  left: 1%;
+  width: 50%;
+}
+
+[id*="day"] .shift2 {
+  position: relative;
+  left: 50%;
+  width: 40%;
+}
+
+[id*="day"] .shift3 {
+  position: relative;
+  left: 40%;
+  width: 25%;
+}
+
+[id*="day"] .shift4 {
+  position: relative;
+  left: 10%;
+  width: 60%;
+}
+
+[id*="day"] .shift5 {
+  position: relative;
+  left: 60%;
+  width: 30%;
+}
+
+[id*="day"] .shift6 {
+  position: relative;
+  left: 65%;
+  width: 30%;
+}
+
+[id*="day"] .shift7 {
+  position: relative;
+  left: 25%;
+  width: 50%;
+}
