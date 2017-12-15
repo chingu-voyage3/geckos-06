@@ -35,7 +35,7 @@ Our members are:
   1. Everyone has met each other and read each other’s bios - *DONE*
   2. We have discussed and agreed on a Project Manager. - *DONE*
   3. We have discussed and agreed on a project. - *DONE*
-  4. We have discussed and set team goals and expectations - *in progress*
+  4. We have discussed and set team goals and expectations - *DONE*
   5. We have set up a project management tool for assigning and tracking tasks - *DONE*
   6. Everyone is in the github team (the repo is automatically generated in the Voyage-3 github organization). - *DONE*
     
