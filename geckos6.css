@@ -205,3 +205,35 @@ h1, h2 {
   left: 25%;
   width: 50%;
 }
+#navigationList{
+  margin-left: 5px;
+  padding: 0px; 
+  list-style: none;
+}
+ul li:hover{
+  background: blue;
+}
+ul li{
+  display: none;
+  margin-left: 30px;
+  background: black;
+  width: 300px;
+  
+}
+ul li p{
+  color: white;
+}
+#navigationButton{
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  border: none;
+  cursor:pointer;
+  overflow: hidden;
+  outline:none;
+  font-size: 45px;
+  margin-left: 30px;
+  margin-top: 10px;
+}
+#navigationButton:hover{
+  color: blue;
+}
