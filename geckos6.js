@@ -21,6 +21,7 @@ const geckos6AppModule = function () {
     settingsButtons: document.querySelectorAll('#settings > button')
   };
 
+
 // Adds text to horizontal "shift" bars:
 (function nameShift1() {
   let lgt = cacheDom.shift1.length;
@@ -45,34 +46,33 @@ cacheDom.hideMenu.addEventListener('click', hideMenu, false);
 
 var placeholderValue = function(event) {
   if ( event.target !== event.currentTarget ) {
-    let text = event.target.innerText;
-    cacheDom.settingsInput.setAttribute('placeholder', text);
+    if ( event.target.nodeName === 'BUTTON') {
+      let text = event.target.innerText + `...`;
+      cacheDom.settingsInput.setAttribute('placeholder', text);
+      console.log(event.target.nodeName);
+    }
   }
-}
+};
 
-var placeholderValue2 = function() {
-  let text = cacheDom.settingsButtons[0].innerText;    cacheDom.settingsInput.setAttribute('placeholder', text);
-}
-
-cacheDom.settingsButtons[0].addEventListener('click', placeholderValue2, false);
+cacheDom.settings.addEventListener('click', placeholderValue, false);
 
 
 // Navigation button by David:
 // Currently unused
 
-var display = false;
-$(document).ready(function() {
-  $("#navigationButton").click(function() {
-    if(!display) {
-      $("ul li").css("display", "block");
-      display = true;
-    }
-    else {
-      $("ul li").css("display", "none");
-      display = false;
-    }
-  });
-});
+// var display = false;
+// $(document).ready(function() {
+//   $("#navigationButton").click(function() {
+//     if(!display) {
+//       $("ul li").css("display", "block");
+//       display = true;
+//     }
+//     else {
+//       $("ul li").css("display", "none");
+//       display = false;
+//     }
+//   });
+// });
 
 
 }();
