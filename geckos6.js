@@ -10,18 +10,80 @@
 const geckos6AppModule = function () {
 
   const cacheDom = {
-    shift1: document.getElementsByClassName('shift1')
-};
+    shift1: document.getElementsByClassName('shift1'),
+    schedule: document.getElementById('schedule'),
+    main: document.getElementsByTagName('main')[0],
+    settings: document.getElementById('settings'),
+    settingsInput: document.getElementById('settings-input'),
+    aside: document.getElementsByTagName('aside')[0],
+    showMenu: document.getElementById('show-menu'),
+    hideMenu: document.getElementById('hide-menu'),
+    settingsButtons: document.querySelectorAll('#settings > button')
+  };
 
-function nameShift1() {
+// Adds text to horizontal "shift" bars:
+(function nameShift1() {
   let lgt = cacheDom.shift1.length;
   for ( let i = 0; i < lgt; i++ ) {
     cacheDom.shift1[i].innerText = 'employee name 7:00am to 1:45pm';
-    console.log(cacheDom.shift1);
+  }
+})()
+
+var hideMenu = function() {
+  cacheDom.aside.classList.add('hide');
+  cacheDom.aside.classList.add('hide2');
+}
+
+var showMenu = function() {
+  cacheDom.aside.classList.remove('hide');
+  cacheDom.aside.classList.remove('hide2');
+}
+
+cacheDom.showMenu.addEventListener('click', showMenu, false);
+
+cacheDom.hideMenu.addEventListener('click', hideMenu, false);
+
+var placeholderValue = function(event) {
+  if ( event.target !== event.currentTarget ) {
+    let text = event.target.innerText;
+    cacheDom.settingsInput.setAttribute('placeholder', text);
   }
 }
 
-nameShift1();
-console.log('test');
+var placeholderValue2 = function() {
+  let text = cacheDom.settingsButtons[0].innerText;
+  cacheDom.settingsInput.setAttribute('placeholder', text);
+}
+
+cacheDom.settingsButtons[0].addEventListener('click', placeholderValue2, false);
+
+
+// Navigation button by David:
+// Currently unused
+
+var display = false;
+$(document).ready(function() {
+  $("#navigationButton").click(function() {
+    if(!display) {
+      $("ul li").css("display", "block");
+      display = true;
+    }
+    else {
+      $("ul li").css("display", "none");
+      display = false;
+    }
+  });
+});
+
 
 }();
+/* Settings Overlay */
+/* Open when someone clicks on the span element */
+function openNav() {
+    document.getElementsByClassName("settings").style.width = "100%";
+}
+
+/* Close when someone clicks on the "x" symbol inside the overlay */
+function closeNav() {
+    document.getElementsByClassName("settings").style.width = "0%";
+}
