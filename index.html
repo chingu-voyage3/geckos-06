@@ -195,9 +195,8 @@
   </ul> -->
 
   <section class="settings">
-
     <h5>SETTINGS</h5>
-    <button>EMPLOYEE SETTINGS</button>
+    <!--<button>EMPLOYEE SETTINGS</button>
     <button>Add an employee</button>
     <button>Set employee availability</button>
     <button>Set employee hours</button>
@@ -209,7 +208,26 @@
     <button>Set employees per shift</button>
     <button>Set the length of shifts</button>
     <br />
-    <input id="settings-input" type="text" placeholder="..." />
+    <input id="settings-input" type="text" placeholder="..." />-->
+    <form>
+    <fieldset>
+        <legend>Employee Settings</legend>
+           <label class="form-content">
+              Add An Employee
+            </label>
+            <input type="text" name = "employee">
+            <fieldset>
+            <legend>Set employee availability using 24 hour clock</legend>
+            <label class="form-content">Set start time
+              <input type="text" name="start">
+            </label>
+             <label class="form-content">Set end time
+               <input type="text" name="end">
+             </label>
+             </fieldset>
+
+        </fieldset>
+      </form>
     <form>
     <fieldset>
         <legend>Business Settings</legend>
@@ -224,21 +242,23 @@
                    <option value="Saturday">Saturday</option>
                    <option value="Sunday">Sunday</option>
                  </select>
-
             </label>
-            <label class="form-content">
-                 Set business hours using 24 hour clock
-            </label>
+            <fieldset>
+            <legend>Set business hours using 24 hour clock</legend>
             <label class="form-content">Set opening time
               <input type="text" name="start">
             </label>
              <label class="form-content">Set closing hour
                <input type="text" name="end">
              </label>
+             </fieldset>
+             <label class="form-content">Set employees per shift
+               <input type="text" name="employee-number">
+             </label>
+
         </fieldset>
       </form>
      </section>
-
 </aside>
 
 

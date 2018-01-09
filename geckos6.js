@@ -18,7 +18,7 @@ const geckos6AppModule = function () {
     aside: document.getElementsByTagName('aside')[0],
     showMenu: document.getElementById('show-menu'),
     hideMenu: document.getElementById('hide-menu'),
-    settingsButtons: document.querySelectorAll('#settings > button')
+    settingsButtons: document.querySelectorAll('.settings > button')
   };
 
 // Adds text to horizontal "shift" bars:
