@@ -215,17 +215,23 @@
            <label class="form-content">
               Add An Employee
             </label>
-            <input type="text" name = "employee">
-            <fieldset>
-            <legend>Set employee availability using 24 hour clock</legend>
-            <label class="form-content">Set start time
-              <input type="text" name="start">
-            </label>
-             <label class="form-content">Set end time
-               <input type="text" name="end">
+            <input type="text" name = "name" required>
+              <label class="form-content">
+                 Employee Available These Days
+                    <select name="day" multiple required>
+                      <option value="Monday">Monday</option>
+                      <option value="Tuesday">Tuesday</option>
+                      <option value="Wednesday">Wednesday</option>
+                      <option value="Thursday">Thursday</option>
+                      <option value="Friday">Friday</option>
+                      <option value="Saturday">Saturday</option>
+                      <option value="Sunday">Sunday</option>
+                    </select>
+               </label>
+             <label class="form-content">Maximum Hours
+               <input type="number" min="1" name="maxHours" required>
              </label>
-             </fieldset>
-
+             <input type="submit" name="employee" value="Send">
         </fieldset>
       </form>
     <form>
@@ -233,7 +239,7 @@
         <legend>Business Settings</legend>
            <label class="form-content">
               Add Business Days
-                 <select name="day" multiple>
+                 <select name="day" multiple required>
                    <option value="Monday">Monday</option>
                    <option value="Tuesday">Tuesday</option>
                    <option value="Wednesday">Wednesday</option>
@@ -243,19 +249,16 @@
                    <option value="Sunday">Sunday</option>
                  </select>
             </label>
-            <fieldset>
-            <legend>Set business hours using 24 hour clock</legend>
             <label class="form-content">Set opening time
-              <input type="text" name="start">
+              <input type="time" min="00:00" max="23:59" name="open" required>
             </label>
-             <label class="form-content">Set closing hour
-               <input type="text" name="end">
+             <label class="form-content">Set closing time
+               <input type="time" min="00:00" max="23:59" name="close" required>
              </label>
-             </fieldset>
              <label class="form-content">Set employees per shift
-               <input type="text" name="employee-number">
+               <input type="number" min="1" name="staffRequired" required>
              </label>
-
+             <input type="submit" name="submit-employees-per-shift" value="Send">
         </fieldset>
       </form>
      </section>
