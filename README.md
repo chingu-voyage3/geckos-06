@@ -28,9 +28,9 @@ Our members are:
   
  <ins>**Timeline**</ins>
  
-  Day 1 (Dec 1):  launch day!<br />
+  Dec 1, 2017:  Launch day!<br />
   
-  Week 1 (Dec 2 - Dec 8): Act 1 Project Setup Milestones
+  Dec 2 - Dec 8, 2017 (first week): Act 1 Project Setup Milestones
   
   1. Everyone has met each other and read each other’s bios - *DONE*
   2. We have discussed and agreed on a Project Manager. - *DONE*
@@ -39,17 +39,15 @@ Our members are:
   5. We have set up a project management tool for assigning and tracking tasks - *DONE*
   6. Everyone is in the github team (the repo is automatically generated in the Voyage-3 github organization). - *DONE*
     
-  Week 2 (Dec 9 - Dec 15):<br />
+  Dec 9, 2017 - Jan 23, 2017:
+  * Designed prototype of schedule grid
+  * Designed prototype of settings page (main menu)
+  * Built algorithm used to distribute shifts based on test objects (business needs vs employees available)
+  * Currently testing algorithm vs multiple scenarios
+  * Currently adding functionality to the settings so that objects can be created (pulling user input values)
+  * Currently working on binding the final schedule object to the schedule grid 
+  * Currently working on a better design  
+
   
-  Week 3 (Dec 16 - Dec 22):<br />
-  
-  Week 4 (Dec 23 - Dec 29):<br />
-  
-  Week 5 (Dec 30 - Jan 5):<br />
-  
-  Week 6 (Jan 6 - Jan 12):<br />
-  
-  Week 7 (Jan 13 - Jan 19):<br />
-  
-  **LAUNCH DATE: JANUARY 20th 2018**
+  **LAUNCH DATE: JANUARY 24th 2018**
   
