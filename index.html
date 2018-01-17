@@ -2,7 +2,7 @@
 <html lang="en-US">
 
 <head>
-  <title>Chingu team Geckos-6 Project</title>
+  <title>Time Trapper</title>
   <meta charset="utf-8">
   <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous"> -->
   <link rel="stylesheet" type="text/css" href="geckos6.css">
@@ -19,7 +19,7 @@
 
 <nav></nav>
   <!-- <h1>Chingu team Geckos-6 Project</h1> -->
-  <h2><ins>Employee Schedule app</ins></h2>
+  <h2><ins>Time Trapper</ins></h2>
 
 </header>
 
@@ -28,8 +28,8 @@
 
   <!-- <section id="schedule"> -->
 
-  <div id='left-legend'>
-    <div id='upper-left-square'>
+  <div id="left-legend">
+    <div id="upper-left-square">
     </div>
 
     <div id="days-of-week" >
@@ -43,7 +43,37 @@
     </div>
   </div> <!-- end of left-legend -->
 
-  <div id='schedule-grid'>
+  <div id="schedule-grid">
+    <div id="vertical-line1" class="line">
+    </div>
+    <div id="vertical-line2" class="line">
+    </div>
+    <div id="vertical-line3" class="line">
+    </div>
+    <div id="vertical-line4" class="line">
+    </div>
+    <div id="vertical-line5" class="line">
+    </div>
+    <div id="vertical-line6" class="line">
+    </div>
+    <div id="vertical-line7" class="line">
+    </div>
+    <div id="vertical-line8" class="line">
+    </div>
+    <div id="vertical-line9" class="line">
+    </div>
+    <div id="vertical-line10" class="line">
+    </div>
+    <div id="vertical-line11" class="line">
+    </div>
+    <div id="vertical-line12" class="line">
+    </div>
+    <div id="vertical-line13" class="line">
+    </div>
+    <div id="vertical-line14" class="line">
+    </div>
+    <div id="vertical-line15" class="line">
+    </div>
     <div id="column-titles">
       <p class="time">7am</p>
       <p class="time">8am</p>
@@ -59,9 +89,10 @@
       <p class="time">6pm</p>
       <p class="time">7pm</p>
       <p class="time">8pm</p>
+      <p class="time">9pm</p>
     </div>
 
-    <div id='day-rows'>
+    <div id="day-rows">
       <div id="day1" class="row row-day">
         <div class="shift1">
         </div>
@@ -184,9 +215,8 @@
 <button id="show-menu">&#9776;</button>
 <!-- <button id="navigationButton"><i class="fa fa-bars"></i></button> -->
 
-
 <aside id="menu">
-  <h1>Chingu team Geckos-6 Project</h1>
+  <h1>Time Trapper</h1>
   <button id="hide-menu">x</button>
 
   <!-- <ul id="navigationList">
@@ -195,18 +225,71 @@
     <li><p class="text-center"> Settings </p></li>
   </ul> -->
 
-  <section id="settings">
+  <section class="settings"> <!-- ZZ (changed from id) -->
 
-    <h5>Settings</h5>
-    <button>Add an employee</button>
+    <h5>SETTINGS</h5>
+    <!-- <button>Add an employee</button>
     <button>Set employee availability</button>
     <button>Set employee hours</button>
     <button>Set employee shifts</button>
     <button>Set business hours</button>
     <button>Set employees per shift</button>
     <button>Set the length of shifts</button>
-    <br />
-    <input id="settings-input" type="text" placeholder="..." />
+    <br /> -->
+    <form>
+    <fieldset>
+        <legend>Employee Settings</legend>
+           <label class="form-content">
+              Add An Employee
+            </label>
+            <input type="text" name = "name" required>
+              <label class="form-content">
+                 Employee Available These Days
+                    <select name="day" multiple required>
+                      <option value="Monday">Monday</option>
+                      <option value="Tuesday">Tuesday</option>
+                      <option value="Wednesday">Wednesday</option>
+                      <option value="Thursday">Thursday</option>
+                      <option value="Friday">Friday</option>
+                      <option value="Saturday">Saturday</option>
+                      <option value="Sunday">Sunday</option>
+                    </select>
+               </label>
+             <label class="form-content">Maximum Hours
+               <input type="number" min="1" name="maxHours" required>
+             </label>
+             <input type="submit" name="employee" value="Send">
+        </fieldset>
+    </form>
+
+    <form>
+    <fieldset>
+        <legend>Business Settings</legend>
+           <label class="form-content">
+              Add Business Days
+                 <select name="day" multiple required>
+                   <option value="Monday">Monday</option>
+                   <option value="Tuesday">Tuesday</option>
+                   <option value="Wednesday">Wednesday</option>
+                   <option value="Thursday">Thursday</option>
+                   <option value="Friday">Friday</option>
+                   <option value="Saturday">Saturday</option>
+                   <option value="Sunday">Sunday</option>
+                 </select>
+            </label>
+            <label class="form-content">Set opening time
+              <input type="time" min="00:00" max="23:59" name="open" required>
+            </label>
+             <label class="form-content">Set closing time
+               <input type="time" min="00:00" max="23:59" name="close" required>
+             </label>
+             <label class="form-content">Set employees per shift
+               <input type="number" min="1" name="staffRequired" required>
+             </label>
+             <input type="submit" name="submit-employees-per-shift" value="Send">
+        </fieldset>
+    </form>
+    <!-- <input id="settings-input" type="text" placeholder="..." /> -->
 
   </section>
 
@@ -215,8 +298,8 @@
 
 <!-- SCRIPTS ******************** -->
 
-  <script type="text/javascript" src="jquery-3.1.1.min.js">
-  </script>
+  <!-- <script type="text/javascript" src="jquery-3.1.1.min.js">
+  </script> -->
   <script src="geckos6.js">
   </script>
 

@@ -2,8 +2,9 @@ body {
   overflow-x: hidden;
   font-family: 'Open Sans', Roboto, sans-serif;
   height: 200vh;
-  width: 100vw;
-  background-color: #3D6D99;
+  width: calc(100vw - 20px);
+  /* background-color: #3D6D99; */
+  background-color: #72746D;
   color: #ccc;
   margin: 0;
   padding: 0;
@@ -19,15 +20,70 @@ header {
 
 h1, h2 {
   text-align: center;
-  margin: 0;
+  margin-bottom: 10px;
   /* font-size: 1em; */
 }
+
+/* REGINA */
+h5 {
+  text-align: center;
+  margin: 0;
+  font-size: 2vh;
+}
+
+#container {
+  display: flex;
+  flex-direction: row;
+}
+
+/* The settings overlay */
+.overlay {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  background-color:#1475CC;
+  background-color: rgba(20, 117, 204, 0.9);
+  overflow-x: hidden; /* Disable horizontal scroll */
+  transition: 0.5s;
+}
+.overlay-content {
+  background-color: #1475CC;
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+  position: relative;
+  text-align: center;
+  top: 25%;
+  width: 100%;
+}
+.overlay a {
+  text-decoration: none;
+  font-size: 2em;
+  text-decoration-color: #ccc;
+}
+.overlay a:hover, .overlay a:focus {
+    color: #f1f1f1;
+}
+.overlay .closebtn {
+    position: absolute;
+    top: 20px;
+    right: 45px;
+    font-size: 60px;
+}
+
+/*****************************/
+
 
 #schedule {
   display: flex;
   flex-direction: row;
-  background-color: #1475CC;
+  /* background-color: #1475CC; */
+  background-color: #222F3D;
   margin: 0;
+  padding: 0;
   padding-bottom: 5px;
   /* position: absolute;
   top: 55%; */
@@ -75,13 +131,69 @@ h1, h2 {
   /* border: 1px solid #ccc; */
 }
 
+[id*="vertical-line"] {
+  display: inherit;
+  position: absolute;
+  height: null;
+  width: 1px;
+  background-color: #555;
+  z-index: 1;
+}
+
+#vertical-line1 {
+  right: calc(85.5% / 15 + 2.6%);
+}
+#vertical-line2 {
+  right: calc((85.5% / 15) * 2 + 2.6%);
+}
+#vertical-line3 {
+  right: calc((85.5% / 15) * 3 + 2.6%);
+}
+#vertical-line4 {
+  right: calc((85.5% / 15) * 4 + 2.6%);
+}
+#vertical-line5 {
+  right: calc((85.5% / 15) * 5 + 2.6%);
+}
+#vertical-line6 {
+  right: calc((85.5% / 15) * 6 + 2.6%);
+}
+#vertical-line7 {
+  right: calc((85.5% / 15) * 7 + 2.6%);
+}
+#vertical-line8 {
+  right: calc((85.5% / 15) * 8 + 2.6%);
+}
+#vertical-line9 {
+  right: calc((85.5% / 15) * 9 + 2.6%);
+}
+#vertical-line10 {
+  right: calc((85.5% / 15) * 10 + 2.6%);
+}
+#vertical-line11 {
+  right: calc((85.5% / 15) * 11 + 2.6%);
+}
+#vertical-line12 {
+  right: calc((85.5% / 15) * 12 + 2.6%);
+}
+#vertical-line13 {
+  right: calc((85.5% / 15) * 13 + 2.6%);
+}
+#vertical-line14 {
+  right: calc((85.5% / 15) * 14 + 2.6%);
+}
+#vertical-line15 {
+  right: calc((85.5% / 15) * 15 + 2.5%);
+}
+
 #column-titles {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   height: 3%;
   width: 100%;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 2px solid #ccc;
+  z-index: 3;
 }
 
 #day-rows {
@@ -105,48 +217,59 @@ h1, h2 {
 }
 
 .row, #days-of-week span {
-  height: calc(100% / 7 - 1px);
+  height: calc(100% / 7 - 2px);
   width: 100%;
   margin: 0;
   padding: 0;
 }
 
 .row {
-  border-bottom: 1px solid #ccc;
+  margin-top: 2px;
+  border-bottom: 2px solid #ccc;
+  z-index: 3;
 }
 
 .time {
   /* border-bottom: 1px solid #aaa; */
   margin: 0;
   padding: 0;
+  /* border: 1px solid #ccc; */
+  width: calc(100% / 15);
 }
 
 .shift1 {
-  background-color: #ff9800;
+  /* background-color: #ff9800; */
+  background-color: #42B34F;
 }
 
 .shift2 {
-  background-color: #78909c;
+  /* background-color: #78909c; */
+  background-color: #5BA2AD;
 }
 
 .shift3 {
-  background-color: #9c27b0;
+  /* background-color: #9c27b0; */
+  background-color: #42B34F;
 }
 
 .shift4 {
-  background-color: #ffeb3b;
+  /* background-color: #ffeb3b; */
+  background-color: #5BA2AD;
 }
 
 .shift5 {
-  background-color: #00bcd4;
+  /* background-color: #00bcd4; */
+  background-color: #42B34F;
 }
 
 .shift6 {
-  background-color: #ff5722;
+  /* background-color: #ff5722; */
+  background-color: #5BA2AD;
 }
 
 .shift7 {
-  background-color: #4caf50;
+  /* background-color: #4caf50; */
+  background-color: #42B34F;
 }
 
 [class*="shift"] {
@@ -156,11 +279,13 @@ h1, h2 {
   margin-top: 2px;
   font-size: 2vh;
   font-weight: bold;
-  color: black;
+  color: #222F3D;
+  /* border: 1px solid black; */
   padding: 5px 0 0 5px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  z-index: 2;
 }
 
 [id*="day"] .shift1 {
@@ -201,8 +326,8 @@ h1, h2 {
 
 [id*="day"] .shift7 {
   position: relative;
-  left: 25%;
-  width: 50%;
+  left: null; /*25% */
+  width: null; /* 50% */
 }
 
 /* #days-of-week span:nth-child(3) {
@@ -225,7 +350,7 @@ aside {
   opacity: 0.95;
   transition: 0.4s;
   visibility: visible;
-  z-index: 1;
+  z-index: 4;
 }
 
 #show-menu, #hide-menu {
@@ -261,33 +386,35 @@ section {
 **************************************/
 
 h5 {
-  text-align: center;
   display: inline;
-  margin: 0;
   padding: 0;
 }
 
-/* #container {
-  display: flex;
-  flex-direction: row;
-} */
-
-#settings {
+.settings {
   /* border: thin solid #f00; */
   display: flex;
   flex-direction: column;
-  font-weight: bold; /* doesn't work ? */
   background-color: #1475CC;
   position: absolute;
   top: 15%;
   left: 50%;
   transform: translate(-50%, -15%);
-  width: 300px;
+  width: 500px;
 }
 
 /* #settings button {
   width: 100%;
 } */
+
+.form-content {
+  display:inline-flex;
+  margin: 10px;
+  padding: 10px;
+}
+
+.form-input {
+  padding: 10px;
+}
 
 
 /**************************************
