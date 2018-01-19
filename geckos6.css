@@ -1,23 +1,75 @@
 body {
+  overflow-x: hidden;
   font-family: 'Open Sans', Roboto, sans-serif;
-  height: 100vh;
+  height: 200vh;
+  width: 100vw;
   background-color: #3D6D99;
   color: #ccc;
   margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; /*main-axis*/
+  align-items: center;
 }
 
 header {
-  height: 10%;
   margin: 0;
 }
 
 h1, h2 {
   text-align: center;
   margin: 0;
-  font-size: 3vh;
+  /* font-size: 1em; */
 }
-
+h5 {
+  text-align: center;
+  margin: 0;
+  font-size: 2vh;
+}
+#container {
+  display: flex;
+  flex-direction: row;
+}
+/* The settings overlay */
+.overlay {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  background-color:#1475CC;
+  background-color: rgba(20, 117, 204, 0.9);
+  overflow-x: hidden; /* Disable horizontal scroll */
+  transition: 0.5s;
+}
+.overlay-content {
+  background-color: #1475CC;
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+  position: relative;
+  text-align: center;
+  top: 25%;
+  width: 100%;
+}
+.overlay a {
+  text-decoration: none;
+  font-size: 2em;
+  text-decoration-color: #ccc;
+}
+.overlay a:hover, .overlay a:focus {
+    color: #f1f1f1;
+}
+.overlay .closebtn {
+    position: absolute;
+    top: 20px;
+    right: 45px;
+    font-size: 60px;
+}
 #schedule {
+  border: 1px solid #f00;
   display: flex;
   flex-direction: row;
   background-color: #1475CC;
@@ -30,6 +82,7 @@ h1, h2 {
   transform: translate(-50%, -55%);
   -webkit-transform: translate(-50%, -50%);
   box-shadow: 0 4px 8px 2px rgba(0, 0, 0, 0.19), 0 6px 20px 2px rgba(0, 0, 0, 0.20);
+  /* box-sizing: border-box; */
   /* border: 1px solid #ccc; */
 }
 
@@ -42,7 +95,7 @@ h1, h2 {
 }
 
 #upper-left-square {
-  height: 5%;
+  height: 3%;
   width: 100%;
   /* border: 1px solid #ccc; */
 }
@@ -50,11 +103,11 @@ h1, h2 {
 #days-of-week {
   display: flex;
   flex-direction: column;
-  height: 95%;
+  height: 97%;
   width: 100%;
   text-align: center;
-  justify-content: space-around; /*main-axis*/
-  align-items: center;
+  justify-content: flex-start; /*main-axis*/
+  align-items: baseline;
   align-content: flex-start;
   /* border: 1px solid #ccc; */
 }
@@ -71,7 +124,7 @@ h1, h2 {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  height: 4%;
+  height: 3%;
   width: 100%;
   border-bottom: 1px solid #ccc;
 }
@@ -79,13 +132,13 @@ h1, h2 {
 #day-rows {
   display: flex;
   flex-direction: column;
-  height: 96%;
+  height: 97%;
   width: 100%;
   /* border-bottom: 1px solid #ccc; */
 }
 
 #column-titles, #days-of-week {
-  font-size: 1vw;
+  font-size: 2vh;
   text-align: center;
 }
 
@@ -96,27 +149,21 @@ h1, h2 {
   /*margin: 0;*/
 }
 
-#schedule-grid {
-  /* box-sizing: border-box; */
+.row, #days-of-week span {
+  height: calc(100% / 7 - 1px);
+  width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 .row {
-  height: 14%;
-  width: 100%;
-  margin-top: 3px;
   border-bottom: 1px solid #ccc;
-}
-
-.row-day {
-  /* border-right: 1px solid #aaa; */
 }
 
 .time {
   /* border-bottom: 1px solid #aaa; */
   margin: 0;
   padding: 0;
-  /* height: 7%; */
-  /* vertical-align: bottom; */
 }
 
 .shift1 {
@@ -125,43 +172,40 @@ h1, h2 {
 
 .shift2 {
   background-color: #78909c;
-  /*margin-left: 14%;*/
 }
 
 .shift3 {
   background-color: #9c27b0;
-  /*margin-left: 28%;*/
 }
 
 .shift4 {
   background-color: #ffeb3b;
-  /*margin-left: 42%;*/
 }
 
 .shift5 {
   background-color: #00bcd4;
-  /*margin-left: 56%;*/
 }
 
 .shift6 {
   background-color: #ff5722;
-  /*margin-left: 70%;*/
 }
 
 .shift7 {
   background-color: #4caf50;
-  /*margin-left: 84%;*/
 }
 
 [class*="shift"] {
-  height: 12%; /* 1/7th */
+  height: calc(100% / 7 - 8px);
   /* float: left; */
   box-shadow: 0 2px 4px 1px rgba(0, 0, 0, 0.19), 0 3px 10px 1px rgba(0, 0, 0, 0.20);
-  margin: 2px 2px 0 0;
-  font-size: 1vh;
+  margin-top: 2px;
+  font-size: 2vh;
   font-weight: bold;
   color: black;
-  padding-left: 5px;
+  padding: 5px 0 0 5px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 [id*="day"] .shift1 {
@@ -204,4 +248,149 @@ h1, h2 {
   position: relative;
   left: 25%;
   width: 50%;
+}
+
+/* #days-of-week span:nth-child(3) {
+  position:relative;
+  bottom: 7%;
+} */
+
+
+/**************************************
+ Menu (settings page):
+**************************************/
+
+aside {
+  position: absolute;
+  top: 0;
+  background-color: #082744;
+  margin: 0;
+  height: 200vh;
+  width: 100vw;
+  opacity: 0.95;
+  transition: 0.4s;
+  visibility: visible;
+  z-index: 1;
+}
+
+#show-menu, #hide-menu {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 50px;
+  height: 50px;
+  color: #ccc;
+  font-size: 2em;
+  /* font-weight: bold; */
+  background-color: transparent;
+  border-style: none;
+  outline: none;
+}
+
+#hide-menu {
+  /* padding: 2px 0 0 2px; */
+  font-size: 2.4em;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+section {
+  display: inline;
+}
+/**************************************
+ SETTING BUTTONS by Regina
+**************************************/
+
+h5 {
+  display: inline;
+  padding: 0;
+}
+
+.settings {
+  /* border: thin solid #f00; */
+  display: flex;
+  flex-direction: column;
+  background-color: #1475CC;
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translate(-50%, -15%);
+  width: 500px;
+}
+/* #settings button {
+  width: 100%;
+} */
+.form-content {
+  display:inline-flex;
+  margin: 10px;
+  padding: 10px;
+}
+.form-input {
+  padding: 10px;
+}
+
+
+
+
+/**************************************
+ Classes added with JavaScript
+**************************************/
+
+.hide {
+  transition: 0.4s;
+  height: 0;
+  /* z-index: -1; */
+  /* display: none; */
+  visibility: hidden;
+}
+
+.hide2 {
+  transition: 0.4s;
+  opacity: 0;
+}
+
+
+/**************************************
+ NAVIGATION BUTTON by David
+ (requires Bootstrap)
+**************************************/
+
+/* #navigationButton {
+  background-color: transparent;
+  background-repeat:no-repeat;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+  width: 40px;
+  height: 40px;
+  display: block;
+  position: absolute;
+  top: 10px;
+  left: 50px;
+} */
+
+/*
+#navigationButton:hover {
+  color: blue;
+}
+*/
+
+
+/**********************************************
+ MEDIA QUERIES:
+**********************************************/
+
+@media (orientation: portrait) {
+  #column-titles, #days-of-week {
+    font-size: 2vw;
+  }
+}
+
+@media (max-aspect-ratio: 4/5) {
+  .time {
+  transform: rotate(45deg);
+  }
 }
