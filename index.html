@@ -212,9 +212,11 @@
 
 </main>
 
-<button id="show-menu">&#9776;</button>
+<button id="show-menu">&#8801;</button> <!-- or &#9776 -->
 <!-- <button id="navigationButton"><i class="fa fa-bars"></i></button> -->
 
+
+<!-- THIS IS THE MAIN MENU (SETTINGS PAGE) -->
 <aside id="menu">
   <h1>Time Trapper</h1>
   <button id="hide-menu">x</button>
@@ -236,6 +238,7 @@
     <button>Set employees per shift</button>
     <button>Set the length of shifts</button>
     <br /> -->
+
     <form>
     <fieldset>
         <legend>Employee Settings</legend>
@@ -293,6 +296,12 @@
 
   </section>
 
+  <div id="employee-object">
+  </div>
+
+  <div id="assigned-shifts-object">
+  </div>
+
 </aside>
 
 
@@ -300,7 +309,11 @@
 
   <!-- <script type="text/javascript" src="jquery-3.1.1.min.js">
   </script> -->
-  <script src="geckos6.js">
+
+  <script type="text/javascript" src="myObjects.js" defer>
+  </script>
+
+  <script type="text/javascript" src="geckos6.js" defer>
   </script>
 
 
