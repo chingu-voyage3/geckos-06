@@ -27,7 +27,11 @@ const geckos6AppModule = (function() {
     hideMenu: document.getElementById('hide-menu'),
     settingsButtons: document.querySelectorAll('#settings > button'),
     employeeObject: document.getElementById('employee-object'),
-    assignedShiftsObject: document.getElementById('assigned-shifts-object')
+    assignedShiftsObject: document.getElementById('assigned-shifts-object'),
+    scroll: document.getElementsByClassName('scroll-texts'),
+    effect1: document.getElementById('effect1'),
+    effect2: document.getElementById('effect2'),
+    shiftAll: document.querySelectorAll('[class*="shift"]')
   };
 
   console.log('')
@@ -226,7 +230,7 @@ const geckos6AppModule = (function() {
         // console.log(remove1, i);
         return element.match(search);
       });
-      let j = i.toString().padStart(2, '0');
+      let j = (i + 1).toString().padStart(2, '0');
       if ( edit === 'edit' ) {
         empl = empl.match(/[A-Za-z]+/g).join(' ');
         shift = shift.substring(2, shift.length);
@@ -263,7 +267,7 @@ const geckos6AppModule = (function() {
     employeeArr1Maker(); //repl.it indicating 'too many errors' but it's working fine!
     employeeArr2Maker();
     employeeArr3Maker();
-    shiftsArr1Maker();
+    shiftsArr1Maker('num');
     shiftsArr2Maker();
     assignedShiftsObj1Maker();
     assignedShiftsObj2Maker('edit'); // cleanup result
@@ -283,25 +287,28 @@ const geckos6AppModule = (function() {
   // or
   // cacheDom.employeeObject.innerText = JSON.stringify(employees); //output;
 
-  let text1 = `<h3>Employee object</h3><br/>`;
+  let text1 = '';
   Object.keys(employees).forEach(function(name) {
     let maxHours = employees[name].maxHours;
     let avail = employees[name].avail;
     text1 += `<ins>${name}</ins>: &nbsp&nbsp max hours: ${maxHours} /  avail: ${avail}</br>`;
   });
-  cacheDom.employeeObject.innerHTML = text1;
+  let paragraph1 = document.getElementById('paragraph1');
+  paragraph1.innerHTML = text1;
 
 
   /*****************************************
    Display assigned shifts object to menu page:
   *****************************************/
 
-  let text2 = `<h3>Assigned shifts</h3><br/>`;
+  // let text2 = `<h3>Assigned shifts</h3><br/>`;
+  let text2 = '';
   for ( var shift in assignedShiftsObj2 ) {
     let name = assignedShiftsObj2[shift];
     text2 += `<ins>${shift}</ins>: &nbsp&nbsp ${name}</br>`;
   };
-  cacheDom.assignedShiftsObject.innerHTML = text2;
+  let paragraph2 = document.getElementById('paragraph2');
+  paragraph2.innerHTML = text2;
 
 
   /*****************************************
@@ -310,7 +317,8 @@ const geckos6AppModule = (function() {
    info extracted from assignedShiftsObj2:
   *****************************************/
 
-  function nameShift1() {
+  // only for 1st shift (testing - it works):
+  function createShift1() {
     let lgt = cacheDom.shift1.length;
     let obj = assignedShiftsObj2;
     let employee = Object.values(obj)[1];
@@ -326,24 +334,62 @@ const geckos6AppModule = (function() {
     }
   }
 
-  function nameShift2() { //ZZ
-    let lgt = cacheDom.shift2.length;
+  // For all shifts (in progress) ZZ
+  // smaller functions that do one thing:
+
+  function positionShiftBar(element, start, end) {
+    let hour = 100 / 15;
+    let shiftLength = end - start;
+    let barLeft = hour * (start - 7);
+    let barWidth = hour * shiftLength;
+    element.style.left = `${barLeft}%`;
+    element.style.width = `${barWidth}%`;
+  }
+
+  function nameShiftBar(element, employee, start, end) {
+    start < 12 ? start+= 'am' :
+    start === 12 ? start = 'noon' :
+    start > 12 ? start = start - 12 + 'pm':
+    null;
+    end < 12 ? end+= 'am' :
+    end === 12 ? end = 'noon' :
+    end > 12 ? end = end - 12 + 'pm':
+    null;
+    element.innerHTML = `${employee}:  &nbsp &nbsp working ${start} to ${end}`;
+  }
+
+  function createShifts() {
     let obj = assignedShiftsObj2;
-    let employee = Object.values(obj)[2];
-    let start = Object.keys(obj)[2].split(' ')[2];
-    let end = Object.keys(obj)[2].split(' ')[4];
-    let dayLength = 14;
-    let barLeft = Math.round((start - 7 + 0.01) / 14) * 100;
-    let barWidth = (end - start + 0.01) / 14 * 100;
-    cacheDom.shift2[0].style.left = barLeft + '%';
-    cacheDom.shift2[0].style.width = barWidth + '%';
-    for ( let i = 0; i < lgt; i++ ) {
-      cacheDom.shift2[i].textContent = `${employee}:  ${start} to ${end}`;
+    let dayIndex = 1;
+    let shiftIndex = 1;
+    // let newDay = false;
+    for ( var shift in obj ) {
+      let employee = obj[shift];
+      // console.log(employee);
+      // console.log(obj);
+      let start = shift.split(' ')[2];
+      let end = shift.split(' ')[4];
+      let day = shift.split(' ')[1];
+      if ( day > dayIndex ) {
+        shiftIndex = 1;
+        dayIndex++
+      }
+      console.log(day);
+      let id = `#day${day}`;
+      // let div = document.getElementById(id).childNodes;
+      let shiftBar = `.shift${shiftIndex}`;
+      // console.log(div.childNodes[1]);
+      // let element = document.querySelector(`${id} ${shiftBar}`);
+      let element = document.querySelector(id).querySelector(shiftBar);
+      console.log(element);
+      positionShiftBar(element, start, end);
+      nameShiftBar(element, employee, start, end);
+      shiftIndex++;
     }
   }
 
-  nameShift1();
-  nameShift2();
+  // createShift1();
+  createShifts();
 
   // manipulate shift1 bar (testing);
 
@@ -354,13 +400,14 @@ const geckos6AppModule = (function() {
 
   /*****************************************
    Set height of vertical lines (CSS manip)
+   No longer required as I figured out the CSS
   *****************************************/
 
-  let lines = cacheDom.line;
-  let scheduleHeight = cacheDom.schedule.getBoundingClientRect().height + 'px';
-  for ( let i = 0; i < lines.length; i++ ) {
-    lines[i].style.height = scheduleHeight;
-  }
+  // let lines = cacheDom.line;
+  // let scheduleHeight = cacheDom.schedule.getBoundingClientRect().height + 'px';
+  // for ( let i = 0; i < lines.length; i++ ) {
+  //   lines[i].style.height = scheduleHeight;
+  // }
 
 
   /*****************************************
@@ -380,6 +427,38 @@ const geckos6AppModule = (function() {
   cacheDom.showMenu.addEventListener('click', showMenu, false);
 
   cacheDom.hideMenu.addEventListener('click', hideMenu, false);
+
+
+  // Remove text fade-out effect when scrolled to bottom:
+  cacheDom.scroll[1].addEventListener('scroll', function(event) {
+    var element = event.target;
+    if ( element.scrollHeight - element.scrollTop === element.clientHeight )
+    {
+      cacheDom.effect2.classList.remove('fade-out-text');
+      console.log('scrolled');
+    }
+    else { cacheDom.effect2.classList.add('fade-out-text');
+    }
+  }, false);
+
+
+  // Remove shift bars if unused:
+  // for ( var asdf in cacheDom.shiftAll ) {
+  //   if ( asdf.nodeType === 1 ) {
+  //     if ( !asdf.style.width ) {
+  //     asdf.style.display = 'none';
+  //     }
+  //   }
+  // };
+
+  // Remove shift bars if unused:
+  for ( let i = 0; i < cacheDom.shiftAll.length; i++ ) {
+    if ( cacheDom.shiftAll[i].nodeType === 1 ) {
+      if ( !cacheDom.shiftAll[i].style.width ) {
+      cacheDom.shiftAll[i].style.display = 'none';
+      }
+    }
+  };
 
   // const placeholderValue = function(event) {
   //   if ( event.target !== event.currentTarget ) {
@@ -413,6 +492,11 @@ const geckos6AppModule = (function() {
   //   });
   // });
 
+return {
+  test: function() {
+    console.log(cacheDom.shift);
+  }
+};
 
 })();
 

@@ -139,7 +139,7 @@ h5 {
 [id*="vertical-line"] {
   display: inherit;
   position: absolute;
-  height: null;
+  height: 100%; /* null; */
   width: 1px;
   background-color: #555;
   z-index: 1;
@@ -284,7 +284,10 @@ h5 {
   font-weight: bold;
   color: #222F3D;
   /* border: 1px solid black; */
-  padding: 5px 0 0 5px;
+  padding: 0 5px 5px 5px;
+  box-sizing: border-box;         /* Opera/IE 8+ */
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -293,46 +296,44 @@ h5 {
 
 [id*="day"] .shift1 {
   position: relative;
-  left: null; /*1%;*/
-  width: null; /*50%;*/
+  left: 0px;
+  width: 0px;
 }
 
 [id*="day"] .shift2 {
   position: relative;
-  left: 50%;
-  width: 40%;
+  left: 0;
+  width: 0;
 }
 
 [id*="day"] .shift3 {
   position: relative;
-  left: calc(100% / 15 * 3); /* 10am */
-  width: calc(100% / 15 * 2); /* 12pm */
-  padding: 0;
-  margin: 0;
+  left: 0;
+  width: 0;
 }
 
 [id*="day"] .shift4 {
   position: relative;
-  left: 10%;
-  width: 60%;
+  left: 0;
+  width: 0;
 }
 
 [id*="day"] .shift5 {
   position: relative;
-  left: 60%;
-  width: 30%;
+  left: 0;
+  width: 0;
 }
 
 [id*="day"] .shift6 {
   position: relative;
-  left: 65%;
-  width: 30%;
+  left: 0%;
+  width: 0%;
 }
 
 [id*="day"] .shift7 {
   position: relative;
-  left: 0%;
-  width: 50%;
+  left: 0;
+  width: 0;
 }
 
 /* #days-of-week span:nth-child(3) {
@@ -347,6 +348,7 @@ h5 {
 
 aside {
   position: absolute;
+  overflow: hidden;
   top: 0;
   background-color: black;
   margin: 0;
@@ -442,26 +444,34 @@ h5 {
 **************************************/
 
 #employee-object {
-  /* position: absolute; */
+  position: relative;
   float: left;
+  overflow: hidden;
+  /* overflow-y: scroll; */
   width: 400px;
   height: 600px;
   margin: 60px 0 0 50px;
-  padding: 10px;
+  /* padding: 10px; */
   /* top: 80px; */
   /* right: 50px; */
   /* transform: translate(-50%, 0%); */
   color: #ccc;
   border: 1px solid #ccc;
 }
+
+/* #employee-object::-webkit-scrollbar {
+  display: none;
+} */
 
 #assigned-shifts-object {
-  /* position: absolute; */
+  position: relative;
   float: left;
+  /* overflow: hidden; */
+  /* overflow-y: scroll; */
   width: 400px;
-  /* height: 600px; */
+  height: 600px;
   margin: 60px 0 0 50px;
-  padding: 10px;
+  /* padding: 10px; */
   /* top: 80px; */
   /* right: 50px; */
   /* transform: translate(-50%, 0%); */
@@ -469,9 +479,44 @@ h5 {
   border: 1px solid #ccc;
 }
 
+/* #assigned-shifts-object::-webkit-scrollbar {
+  display: none;
+} */
+
 h3 {
+  /* display: inline; */
+  position: absolute;
+  width: 400px;
+  height: 30px;
   text-align: center;
   margin: 0;
+  padding: 0;
+}
+
+.fade-out-text {
+  position: absolute;
+  width: 100%;
+  height: 70px;
+  top: 530px;
+  background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,1));
+  z-index: 4;
+}
+
+.scroll-texts {
+  position: relative;
+  top: 35px;
+  height: 560px;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+
+.scroll-texts::-webkit-scrollbar {
+  display: none;
+}
+
+.menu-text {
+  height: 550px;
+  padding: 7px;
 }
 
 
