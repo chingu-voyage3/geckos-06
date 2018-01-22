@@ -4,7 +4,7 @@ body {
   height: 200vh;
   width: calc(100vw - 20px);
   /* background-color: #3D6D99; */
-  background-color: #72746D;
+  background-color: #555560; /*#72746D;*/
   color: #ccc;
   margin: 0;
   padding: 0;
@@ -49,6 +49,7 @@ h5 {
   overflow-x: hidden; /* Disable horizontal scroll */
   transition: 0.5s;
 }
+
 .overlay-content {
   background-color: #1475CC;
   display: flex;
@@ -59,14 +60,17 @@ h5 {
   top: 25%;
   width: 100%;
 }
+
 .overlay a {
   text-decoration: none;
   font-size: 2em;
   text-decoration-color: #ccc;
 }
+
 .overlay a:hover, .overlay a:focus {
     color: #f1f1f1;
 }
+
 .overlay .closebtn {
     position: absolute;
     top: 20px;
@@ -78,6 +82,7 @@ h5 {
 
 
 #schedule {
+  position:relative;
   display: flex;
   flex-direction: row;
   /* background-color: #1475CC; */
@@ -134,56 +139,53 @@ h5 {
 [id*="vertical-line"] {
   display: inherit;
   position: absolute;
-  height: null;
+  height: 100%; /* null; */
   width: 1px;
   background-color: #555;
   z-index: 1;
 }
 
 #vertical-line1 {
-  right: calc(85.5% / 15 + 2.6%);
+  left: calc(10% + (90% / 15));
 }
 #vertical-line2 {
-  right: calc((85.5% / 15) * 2 + 2.6%);
+  left: calc(10% + (90% / 15 * 2));
 }
 #vertical-line3 {
-  right: calc((85.5% / 15) * 3 + 2.6%);
+  left: calc(10% + (90% / 15 * 3));
 }
 #vertical-line4 {
-  right: calc((85.5% / 15) * 4 + 2.6%);
+  left: calc(10% + (90% / 15 * 4));
 }
 #vertical-line5 {
-  right: calc((85.5% / 15) * 5 + 2.6%);
+  left: calc(10% + (90% / 15 * 5));
 }
 #vertical-line6 {
-  right: calc((85.5% / 15) * 6 + 2.6%);
+  left: calc(10% + (90% / 15 * 6));
 }
 #vertical-line7 {
-  right: calc((85.5% / 15) * 7 + 2.6%);
+  left: calc(10% + (90% / 15 * 7));
 }
 #vertical-line8 {
-  right: calc((85.5% / 15) * 8 + 2.6%);
+  left: calc(10% + (90% / 15 * 8));
 }
 #vertical-line9 {
-  right: calc((85.5% / 15) * 9 + 2.6%);
+  left: calc(10% + (90% / 15 * 9));
 }
 #vertical-line10 {
-  right: calc((85.5% / 15) * 10 + 2.6%);
+  left: calc(10% + (90% / 15 * 10));
 }
 #vertical-line11 {
-  right: calc((85.5% / 15) * 11 + 2.6%);
+  left: calc(10% + (90% / 15 * 11));
 }
 #vertical-line12 {
-  right: calc((85.5% / 15) * 12 + 2.6%);
+  left: calc(10% + (90% / 15 * 12));
 }
 #vertical-line13 {
-  right: calc((85.5% / 15) * 13 + 2.6%);
+  left: calc(10% + (90% / 15 * 13));
 }
 #vertical-line14 {
-  right: calc((85.5% / 15) * 14 + 2.6%);
-}
-#vertical-line15 {
-  right: calc((85.5% / 15) * 15 + 2.5%);
+  left: calc(10% + (90% / 15 * 14));
 }
 
 #column-titles {
@@ -231,6 +233,7 @@ h5 {
 
 .time {
   /* border-bottom: 1px solid #aaa; */
+  text-align: left;
   margin: 0;
   padding: 0;
   /* border: 1px solid #ccc; */
@@ -281,7 +284,10 @@ h5 {
   font-weight: bold;
   color: #222F3D;
   /* border: 1px solid black; */
-  padding: 5px 0 0 5px;
+  padding: 0 5px 5px 5px;
+  box-sizing: border-box;         /* Opera/IE 8+ */
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -290,44 +296,44 @@ h5 {
 
 [id*="day"] .shift1 {
   position: relative;
-  left: null; /*1%;*/
-  width: null; /*50%;*/
+  left: 0px;
+  width: 0px;
 }
 
 [id*="day"] .shift2 {
   position: relative;
-  left: 50%;
-  width: 40%;
+  left: 0;
+  width: 0;
 }
 
 [id*="day"] .shift3 {
   position: relative;
-  left: 40%;
-  width: 25%;
+  left: 0;
+  width: 0;
 }
 
 [id*="day"] .shift4 {
   position: relative;
-  left: 10%;
-  width: 60%;
+  left: 0;
+  width: 0;
 }
 
 [id*="day"] .shift5 {
   position: relative;
-  left: 60%;
-  width: 30%;
+  left: 0;
+  width: 0;
 }
 
 [id*="day"] .shift6 {
   position: relative;
-  left: 65%;
-  width: 30%;
+  left: 0%;
+  width: 0%;
 }
 
 [id*="day"] .shift7 {
   position: relative;
-  left: 0.7%;
-  width: 50%;
+  left: 0;
+  width: 0;
 }
 
 /* #days-of-week span:nth-child(3) {
@@ -342,6 +348,7 @@ h5 {
 
 aside {
   position: absolute;
+  overflow: hidden;
   top: 0;
   background-color: black;
   margin: 0;
@@ -365,14 +372,14 @@ aside {
   height: 50px;
   color: #ccc;
   font-size: 2em;
-  font-weight: bold;
+  /* font-weight: bold; */
   background-color: transparent;
   border-style: none;
   outline: none;
 }
 
 #show-menu {
-  transform: scale(1.4);
+  transform: scale(1.4, 1.2);
 }
 
 #hide-menu {
@@ -437,26 +444,34 @@ h5 {
 **************************************/
 
 #employee-object {
-  /* position: absolute; */
+  position: relative;
   float: left;
+  overflow: hidden;
+  /* overflow-y: scroll; */
   width: 400px;
   height: 600px;
   margin: 60px 0 0 50px;
-  padding: 10px;
+  /* padding: 10px; */
   /* top: 80px; */
   /* right: 50px; */
   /* transform: translate(-50%, 0%); */
   color: #ccc;
   border: 1px solid #ccc;
 }
+
+/* #employee-object::-webkit-scrollbar {
+  display: none;
+} */
 
 #assigned-shifts-object {
-  /* position: absolute; */
+  position: relative;
   float: left;
+  /* overflow: hidden; */
+  /* overflow-y: scroll; */
   width: 400px;
-  /* height: 600px; */
+  height: 600px;
   margin: 60px 0 0 50px;
-  padding: 10px;
+  /* padding: 10px; */
   /* top: 80px; */
   /* right: 50px; */
   /* transform: translate(-50%, 0%); */
@@ -464,9 +479,44 @@ h5 {
   border: 1px solid #ccc;
 }
 
+/* #assigned-shifts-object::-webkit-scrollbar {
+  display: none;
+} */
+
 h3 {
+  /* display: inline; */
+  position: absolute;
+  width: 400px;
+  height: 30px;
   text-align: center;
   margin: 0;
+  padding: 0;
+}
+
+.fade-out-text {
+  position: absolute;
+  width: 100%;
+  height: 70px;
+  top: 530px;
+  background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,1));
+  z-index: 4;
+}
+
+.scroll-texts {
+  position: relative;
+  top: 35px;
+  height: 560px;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+
+.scroll-texts::-webkit-scrollbar {
+  display: none;
+}
+
+.menu-text {
+  height: 550px;
+  padding: 7px;
 }
 
 
@@ -527,6 +577,6 @@ h3 {
 
 @media (max-aspect-ratio: 4/5) {
   .time {
-  transform: rotate(45deg);
+  transform: rotate(45deg) translateX(-1px) translateY(15px);
   }
 }

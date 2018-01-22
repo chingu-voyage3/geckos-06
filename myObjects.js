@@ -92,22 +92,22 @@ const timetable = {
   },
   Wednesday: {
     open: 7,
-    close: 18,
+    close: 16,
     staffRequired: 2
   },
   Thursday: {
     open: 7,
-    close: 20,
+    close: 16,
     staffRequired: 3
   },
   Friday: {
     open: 7,
-    close: 20,
+    close: 16,
     staffRequired: 3
   },
   Saturday: {
     open: 9,
-    close: 20,
+    close: 16,
     staffRequired: 5
   },
   Sunday: {
