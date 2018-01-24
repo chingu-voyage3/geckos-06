@@ -31,10 +31,22 @@ const geckos6AppModule = (function() {
     scroll: document.getElementsByClassName('scroll-texts'),
     effect1: document.getElementById('effect1'),
     effect2: document.getElementById('effect2'),
-    shiftAll: document.querySelectorAll('[class*="shift"]')
+    shiftAll: document.querySelectorAll('[class*="shift"]'),
+    emplName: document.getElementById('employee-name'),
+    availDays: document.getElementById('avail-days'),
+    maxHours: document.getElementById('max-hours'),
+    submitEmployee: document.getElementById('submit-employee'),
+    businessDay: document.getElementById('business-day'),
+    open: document.getElementById('open'),
+    close: document.getElementById('close'),
+    demo: document.getElementById('demo'),
+    saveAll: document.getElementById('save-all'),
+    clearAll: document.getElementById('clear-all'),
+    numShifts: document.getElementById('num-shifts'),
+    submitBusinessDay: document.getElementById('submit-business-day')
   };
 
-  console.log('')
+  console.log(''); // for testing cacheDom
 
   /*****************************************
    Schedule Maker algorithm:
@@ -49,9 +61,7 @@ const geckos6AppModule = (function() {
   var assignedShiftsObj1 = {};
   var assignedShiftsObj2 = {};
 
-  // Sample employees object for testing:
-  // Moved to an external file named 'myObjects'
-
+  // Sample employees object in external file named 'myObjects.js'
 
   // create initial array of employee names with a repeat for every number of possible shifts:
   // identifier: 00-00-00-0-name-[avail]
@@ -317,7 +327,9 @@ const geckos6AppModule = (function() {
    info extracted from assignedShiftsObj2:
   *****************************************/
 
+  /*
   // only for 1st shift (testing - it works):
+
   function createShift1() {
     let lgt = cacheDom.shift1.length;
     let obj = assignedShiftsObj2;
@@ -334,8 +346,14 @@ const geckos6AppModule = (function() {
     }
   }
 
-  // For all shifts (in progress) ZZ
-  // smaller functions that do one thing:
+  // manipulate shift1 bar (testing):
+
+  set width of shift1 bar (for testing only):
+  cacheDom.shift1[0].style.left = '1%';
+  cacheDom.shift1[0].style.width = '50%';
+  */
+
+  // Create schedule grid bars for all shifts:
 
   function positionShiftBar(element, start, end) {
     let hour = 100 / 15;
@@ -355,7 +373,7 @@ const geckos6AppModule = (function() {
     end === 12 ? end = 'noon' :
     end > 12 ? end = end - 12 + 'pm':
     null;
-    element.innerHTML = `${employee}:  &nbsp &nbsp working ${start} to ${end}`;
+    element.innerHTML = `${employee}:  &nbsp &nbsp ${start} to ${end}`;
   }
 
   function createShifts() {
@@ -391,12 +409,6 @@ const geckos6AppModule = (function() {
   // createShift1();
   createShifts();
 
-  // manipulate shift1 bar (testing);
-
-  // set width of shift1 bar (for testing only):
-  // cacheDom.shift1[0].style.left = '1%';
-  // cacheDom.shift1[0].style.width = '50%';
-
 
   /*****************************************
    Set height of vertical lines (CSS manip)
@@ -411,7 +423,7 @@ const geckos6AppModule = (function() {
 
 
   /*****************************************
-   Navigation functions:
+   Navigation functions & event listeners:
   *****************************************/
 
   const hideMenu = function() {
@@ -429,6 +441,44 @@ const geckos6AppModule = (function() {
   cacheDom.hideMenu.addEventListener('click', hideMenu, false);
 
 
+  // ZZ
+
+  // create array of employee's available days:
+  (function getAvailDays() {
+    let weekdays = cacheDom.availDays.childNodes;
+    let checkboxes = [];
+    for ( var input in weekdays ) {
+      if ( input.nodeName === 'input' ) {
+        
+      }
+    }
+    console.log('weekdays: ', weekdays);
+  })()
+
+  cacheDom.submitEmployee.addEventListener('click', function() {
+    let name = cacheDom.emplName.value;
+    // let cacheDom.availDays.value;
+    let maxHours = cacheDom.maxHours.value;
+    createEmployees();
+  }, false);
+
+  cacheDom.submitBusinessDay.addEventListener('click', function() {
+
+  }, false);
+
+  cacheDom.demo.addEventListener('click', function() {
+
+  }, false);
+
+  cacheDom.saveAll.addEventListener('click', function() {
+
+  }, false);
+
+  cacheDom.clearAll.addEventListener('click', function() {
+
+  }, false);
+
+
   // Remove text fade-out effect when scrolled to bottom:
   cacheDom.scroll[1].addEventListener('scroll', function(event) {
     var element = event.target;
@@ -443,15 +493,6 @@ const geckos6AppModule = (function() {
 
 
   // Remove shift bars if unused:
-  // for ( var asdf in cacheDom.shiftAll ) {
-  //   if ( asdf.nodeType === 1 ) {
-  //     if ( !asdf.style.width ) {
-  //     asdf.style.display = 'none';
-  //     }
-  //   }
-  // };
-
-  // Remove shift bars if unused:
   for ( let i = 0; i < cacheDom.shiftAll.length; i++ ) {
     if ( cacheDom.shiftAll[i].nodeType === 1 ) {
       if ( !cacheDom.shiftAll[i].style.width ) {
@@ -460,37 +501,24 @@ const geckos6AppModule = (function() {
     }
   };
 
-  // const placeholderValue = function(event) {
-  //   if ( event.target !== event.currentTarget ) {
-  //     if ( event.target.nodeName === 'BUTTON') {
-  //       let text = event.target.innerText + `...`;
-  //       cacheDom.settingsInput.setAttribute('placeholder', text);
-  //       console.log(event.target.nodeName);
-  //     }
-  //   }
-  // };
+  // Prevent scrolling of menu page when cursor inside scrollable objects:
 
-  // cacheDom.settings.addEventListener('click', placeholderValue, false);
+  function hideOverflow() {
+    document.body.style.overflowY = "hidden";
+  }
 
+  function showOverflow() {
+    document.body.style.overflowY = "unset";
+  }
 
-  /*****************************************
-   Navigation button by David:
-   (currently unused)
-  *****************************************/
+  cacheDom.employeeObject.addEventListener('mouseover', hideOverflow, false);
 
-  // var display = false;
-  // $(document).ready(function() {
-  //   $("#navigationButton").click(function() {
-  //     if(!display) {
-  //       $("ul li").css("display", "block");
-  //       display = true;
-  //     }
-  //     else {
-  //       $("ul li").css("display", "none");
-  //       display = false;
-  //     }
-  //   });
-  // });
+  cacheDom.assignedShiftsObject.addEventListener('mouseover', hideOverflow, false);
+
+  cacheDom.employeeObject.addEventListener('mouseout', showOverflow, false);
+
+  cacheDom.assignedShiftsObject.addEventListener('mouseout', showOverflow, false);
+
 
 return {
   test: function() {
