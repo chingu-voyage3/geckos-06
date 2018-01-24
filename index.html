@@ -208,12 +208,9 @@
     </div>
   </div>  <!-- end of schedule-grid -->
 
-  <!-- </section> -->
-
 </main>
 
 <button id="show-menu">&#8801;</button> <!-- or &#9776 -->
-<!-- <button id="navigationButton"><i class="fa fa-bars"></i></button> -->
 
 
 <!-- THIS IS THE MAIN MENU (SETTINGS PAGE) -->
@@ -221,80 +218,72 @@
   <h1>Time Trapper</h1>
   <button id="hide-menu">x</button>
 
-  <!-- <ul id="navigationList">
-    <li><p class="text-center"> Schedule </p></li>
-    <li><p class="text-center"> Employees </p></li>
-    <li><p class="text-center"> Settings </p></li>
-  </ul> -->
-
   <section class="settings"> <!-- ZZ (changed from id) -->
 
     <h5>SETTINGS</h5>
-    <!-- <button>Add an employee</button>
-    <button>Set employee availability</button>
-    <button>Set employee hours</button>
-    <button>Set employee shifts</button>
-    <button>Set business hours</button>
-    <button>Set employees per shift</button>
-    <button>Set the length of shifts</button>
-    <br /> -->
 
     <form>
-    <fieldset>
-        <legend>Employee Settings</legend>
-           <label class="form-content">
-              Add An Employee
-            </label>
-            <input type="text" name = "name" required>
-              <label class="form-content">
-                 Employee Available These Days</label><br>
-                    <col id="column-titles">
-                      <input type="checkbox" name="name" value="Monday">Monday<br>
-                      <input type="checkbox" name="name" value="Tuesday">Tuesday<br>
-                      <input type="checkbox" name="name"value="Wednesday">Wednesday</option>
-                      <input type="checkbox" name="name"value="Thursday">Thursday</option>
-                      <input type="checkbox" name="name" value="Friday">Friday</option>
-                      <input type="checkbox" name="name"value="Saturday">Saturday</option>
-                      <input type="checkbox" name="name" value="Sunday">Sunday</option>
-                    </col>
-               
-             <label class="form-content">Maximum Hours
-               <input type="number" min="1" name="maxHours" required>
-             </label>
-             <input type="submit" name="employee" value="Send">
-        </fieldset>
+      <fieldset>
+      <legend><strong>Employee Settings</strong></legend>
+        <label class="form-content">
+          Add an employee:
+        </label>
+          <input id="employee-name" type="text" name="name" style="width: 250px" placeholder="name..." required />
+        <label class="form-content">
+          Available the following days:
+        </label>
+        <br />
+        <div id="avail-days">
+          <input type="checkbox" name="weekday" value="Monday" /><span> Monday</span><br/>
+          <input type="checkbox" name="weekday" value="Tuesday" /><span> Tuesday</span><br/>
+          <input type="checkbox" name="weekday"value="Wednesday" /><span> Wednesday</span><br/>
+          <input type="checkbox" name="weekday"value="Thursday" /><span> Thursday</span><br/>
+          <input type="checkbox" name="weekday" value="Friday" /><span> Friday</span><br/>
+          <input type="checkbox" name="weekday"value="Saturday" /><span> Saturday</span><br/>
+          <input type="checkbox" name="weekday" value="Sunday" /><span> Sunday</span><br/>
+        </div>
+        <label class="form-content">Maximum available hours per week:
+        </label>
+        <input id="max-hours" type="number" min="4" step="4" name="maxHours" style="width: 50px" required />
+        <input id="submit-employee" type="submit" name="employee" value="add" />
+      </fieldset>
     </form>
 
     <form>
     <fieldset>
-        <legend>Business Settings</legend>
-           <label class="form-content">
-              Add Business Days
-                 <select name="day" multiple required>
-                   <option value="Monday">Monday</option>
-                   <option value="Tuesday">Tuesday</option>
-                   <option value="Wednesday">Wednesday</option>
-                   <option value="Thursday">Thursday</option>
-                   <option value="Friday">Friday</option>
-                   <option value="Saturday">Saturday</option>
-                   <option value="Sunday">Sunday</option>
-                 </select>
-            </label>
-            <label class="form-content">Set opening time
-              <input type="time" min="00:00" max="23:59" name="open" required>
-            </label>
-             <label class="form-content">Set closing time
-               <input type="time" min="00:00" max="23:59" name="close" required>
-             </label>
-             <label class="form-content">Set employees per shift
-               <input type="number" min="1" name="staffRequired" required>
-             </label>
-             <input type="submit" name="submit-employees-per-shift" value="Send">
-        </fieldset>
+      <legend><strong>Business Settings</strong>
+      </legend>
+        <label id="adjust-up" class="form-content">
+          Add Business Days:
+        </label>
+        <select id="business-day" name="day" multiple required>
+          <option value="Monday" selected>Monday</option>
+          <option value="Tuesday">Tuesday</option>
+          <option value="Wednesday">Wednesday</option>
+          <option value="Thursday">Thursday</option>
+          <option value="Friday">Friday</option>
+          <option value="Saturday">Saturday</option>
+          <option value="Sunday">Sunday</option>
+        </select>
+        <br />
+        <label class="form-content">Set opening time:
+        </label>
+        <input id="open" type="time" min="07:00" max="21:00" name="open" value="07:00" required />
+        <br />
+        <label class="form-content">Set closing time:
+        </label>
+        <input id="close" type="time" min="07:00" max="21:00" name="close" value="18:00" required>
+        <label class="form-content">Set employees per shift:
+        </label>
+        <input id="num-shifts" type="number" min="1" name="staffRequired" style="width: 50px" required />
+        <input id="submit-business-day" type="submit" name="submit-business-day" value="add">
+      </fieldset>
     </form>
     <!-- <input id="settings-input" type="text" placeholder="..." /> -->
 
   </section>
+
+  <section>
 
   <div id="employee-object">
     <h3>Employee object</h3>
@@ -317,6 +306,16 @@
       </p>
     </div>
   </div>
+
+  <section id="settings-buttons">
+
+  <button id="demo" type="button" name="demo">demo</button>
+  <br />
+  <button id="save-all" type="button" name="clear demo">save all</button>
+  <br />
+  <button id="clear-all" type="button" name="clear demo">clear all</button>
+
+  </section>
 
 </aside>
 
