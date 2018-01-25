@@ -2,14 +2,13 @@ body {
   overflow-x: hidden;
   font-family: 'Open Sans', Roboto, sans-serif;
   height: 200vh;
-  width: 100vw;
-  background-color: #3D6D99;
+  width: calc(100vw - 20px);
+  background-color: #555560;
   color: #ccc;
   margin: 0;
   padding: 0;
   display: flex;
   flex-direction: column;
-  /* justify-content: center; /*main-axis*/
   align-items: center;
 }
 
@@ -19,71 +18,31 @@ header {
 
 h1, h2 {
   text-align: center;
-  margin: 0;
-  /* font-size: 1em; */
+  margin-bottom: 10px;
 }
+
 h5 {
   text-align: center;
   margin: 0;
   font-size: 2vh;
 }
+
 #container {
   display: flex;
   flex-direction: row;
 }
-/* The settings overlay */
-.overlay {
-  height: 100%;
-  width: 0;
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  background-color:#1475CC;
-  background-color: rgba(20, 117, 204, 0.9);
-  overflow-x: hidden; /* Disable horizontal scroll */
-  transition: 0.5s;
-}
-.overlay-content {
-  background-color: #1475CC;
-  display: flex;
-  flex-direction: column;
-  margin-top: 30px;
-  position: relative;
-  text-align: center;
-  top: 25%;
-  width: 100%;
-}
-.overlay a {
-  text-decoration: none;
-  font-size: 2em;
-  text-decoration-color: #ccc;
-}
-.overlay a:hover, .overlay a:focus {
-    color: #f1f1f1;
-}
-.overlay .closebtn {
-    position: absolute;
-    top: 20px;
-    right: 45px;
-    font-size: 60px;
-}
+
 #schedule {
-  border: 1px solid #f00;
+  position:relative;
   display: flex;
   flex-direction: row;
-  background-color: #1475CC;
-  /* margin-top: 50px; */
-  position: absolute;
-  top: 55%;
-  left: 50%;
-  height: 85%;
+  background-color: #222F3D;
+  margin: 0;
+  padding: 0;
+  padding-bottom: 5px;
+  height: 100%;
   width: 95%;
-  transform: translate(-50%, -55%);
-  -webkit-transform: translate(-50%, -50%);
   box-shadow: 0 4px 8px 2px rgba(0, 0, 0, 0.19), 0 6px 20px 2px rgba(0, 0, 0, 0.20);
-  /* box-sizing: border-box; */
-  /* border: 1px solid #ccc; */
 }
 
 #left-legend {
@@ -91,13 +50,11 @@ h5 {
   flex-direction: column;
   height: 100%;
   width: 10%;
-  /* border: 1px solid #ccc; */
 }
 
 #upper-left-square {
   height: 3%;
   width: 100%;
-  /* border: 1px solid #ccc; */
 }
 
 #days-of-week {
@@ -106,10 +63,9 @@ h5 {
   height: 97%;
   width: 100%;
   text-align: center;
-  justify-content: flex-start; /*main-axis*/
+  justify-content: flex-start;
   align-items: baseline;
   align-content: flex-start;
-  /* border: 1px solid #ccc; */
 }
 
 #schedule-grid {
@@ -117,7 +73,58 @@ h5 {
   flex-direction: column;
   height: 100%;
   width: 90%;
-  /* border: 1px solid #ccc; */
+}
+
+[id*="vertical-line"] {
+  display: inherit;
+  position: absolute;
+  height: 100%;
+  width: 1px;
+  background-color: #555;
+  z-index: 1;
+}
+
+#vertical-line1 {
+  left: calc(10% + (90% / 15));
+}
+#vertical-line2 {
+  left: calc(10% + (90% / 15 * 2));
+}
+#vertical-line3 {
+  left: calc(10% + (90% / 15 * 3));
+}
+#vertical-line4 {
+  left: calc(10% + (90% / 15 * 4));
+}
+#vertical-line5 {
+  left: calc(10% + (90% / 15 * 5));
+}
+#vertical-line6 {
+  left: calc(10% + (90% / 15 * 6));
+}
+#vertical-line7 {
+  left: calc(10% + (90% / 15 * 7));
+}
+#vertical-line8 {
+  left: calc(10% + (90% / 15 * 8));
+}
+#vertical-line9 {
+  left: calc(10% + (90% / 15 * 9));
+}
+#vertical-line10 {
+  left: calc(10% + (90% / 15 * 10));
+}
+#vertical-line11 {
+  left: calc(10% + (90% / 15 * 11));
+}
+#vertical-line12 {
+  left: calc(10% + (90% / 15 * 12));
+}
+#vertical-line13 {
+  left: calc(10% + (90% / 15 * 13));
+}
+#vertical-line14 {
+  left: calc(10% + (90% / 15 * 14));
 }
 
 #column-titles {
@@ -126,7 +133,8 @@ h5 {
   justify-content: space-around;
   height: 3%;
   width: 100%;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 2px solid #ccc;
+  z-index: 3;
 }
 
 #day-rows {
@@ -134,7 +142,6 @@ h5 {
   flex-direction: column;
   height: 97%;
   width: 100%;
-  /* border-bottom: 1px solid #ccc; */
 }
 
 #column-titles, #days-of-week {
@@ -144,116 +151,119 @@ h5 {
 
 #days-of-week span {
   width: 100px;
-  /* text-align: center; */
   text-decoration: underline;
-  /*margin: 0;*/
 }
 
 .row, #days-of-week span {
-  height: calc(100% / 7 - 1px);
+  height: calc(100% / 7 - 2px);
   width: 100%;
   margin: 0;
   padding: 0;
 }
 
 .row {
-  border-bottom: 1px solid #ccc;
+  margin-top: 2px;
+  border-bottom: 2px solid #ccc;
+  z-index: 3;
 }
 
 .time {
-  /* border-bottom: 1px solid #aaa; */
+  text-align: left;
   margin: 0;
   padding: 0;
+  width: calc(100% / 15);
 }
 
 .shift1 {
-  background-color: #ff9800;
+  background-color: #42B34F;
 }
 
 .shift2 {
-  background-color: #78909c;
+  background-color: #5BA2AD;
 }
 
 .shift3 {
-  background-color: #9c27b0;
+  background-color: #42B34F;
 }
 
 .shift4 {
-  background-color: #ffeb3b;
+  background-color: #5BA2AD;
 }
 
 .shift5 {
-  background-color: #00bcd4;
+  background-color: #42B34F;
 }
 
 .shift6 {
-  background-color: #ff5722;
+  background-color: #5BA2AD;
 }
 
 .shift7 {
-  background-color: #4caf50;
+  background-color: #42B34F;
 }
 
 [class*="shift"] {
+  display: block;
   height: calc(100% / 7 - 8px);
   /* float: left; */
   box-shadow: 0 2px 4px 1px rgba(0, 0, 0, 0.19), 0 3px 10px 1px rgba(0, 0, 0, 0.20);
   margin-top: 2px;
+  float-: none;
   font-size: 2vh;
   font-weight: bold;
-  color: black;
-  padding: 5px 0 0 5px;
+  color: #222F3D;
+  /* border: 1px solid black; */
+  padding: 0 5px 5px 5px;
+  box-sizing: border-box;         /* Opera/IE 8+ */
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  z-index: 2;
 }
 
 [id*="day"] .shift1 {
   position: relative;
-  left: 1%;
-  width: 50%;
+  left: 0;
+  width: 0;
 }
 
 [id*="day"] .shift2 {
   position: relative;
-  left: 50%;
-  width: 40%;
+  left: 0;
+  width: 0;
 }
 
 [id*="day"] .shift3 {
   position: relative;
-  left: 40%;
-  width: 25%;
+  left: 0;
+  width: 0;
 }
 
 [id*="day"] .shift4 {
   position: relative;
-  left: 10%;
-  width: 60%;
+  left: 0;
+  width: 0;
 }
 
 [id*="day"] .shift5 {
   position: relative;
-  left: 60%;
-  width: 30%;
+  left: 0;
+  width: 0;
 }
 
 [id*="day"] .shift6 {
   position: relative;
-  left: 65%;
-  width: 30%;
+  left: 0;
+  width: 0;
 }
 
 [id*="day"] .shift7 {
   position: relative;
-  left: 25%;
-  width: 50%;
+  left: 0;
+  width: 0;
 }
-
-/* #days-of-week span:nth-child(3) {
-  position:relative;
-  bottom: 7%;
-} */
 
 
 /**************************************
@@ -262,45 +272,70 @@ h5 {
 
 aside {
   position: absolute;
+  overflow: hidden;
   top: 0;
-  background-color: #082744;
+  background-color: #222F3D;
   margin: 0;
   height: 200vh;
   width: 100vw;
-  opacity: 0.95;
+  opacity: 1;
   transition: 0.4s;
   visibility: visible;
-  z-index: 1;
+  z-index: 4;
 }
 
 #show-menu, #hide-menu {
   position: absolute;
+  display: inline;
+  text-align: center;
+  padding: 0;
+  margin: 0;
   top: 5px;
   left: 5px;
   width: 50px;
   height: 50px;
   color: #ccc;
   font-size: 2em;
-  /* font-weight: bold; */
   background-color: transparent;
   border-style: none;
   outline: none;
 }
 
+#show-menu {
+  transform: scale(1.4, 1.2);
+}
+
 #hide-menu {
-  /* padding: 2px 0 0 2px; */
-  font-size: 2.4em;
+  font-size: 2.3em;
+  top: 3px;
+  left: 15px;
+  font-weight: normal;
+  transform: scaleX(1.3);
+}
+
+section {
+  display: inline;
+}
+
+#demo, #save-all, #clear-all, #create-schedule {
+  width: 100px;
+  height: 40px;
+  margin-bottom: 10px;
+  background-color: #5BA2AD;
+  border: solid 1px black;
+  border-radius: 0.25em;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 
 button:hover {
   cursor: pointer;
 }
 
-section {
-  display: inline;
-}
+
 /**************************************
- SETTING BUTTONS by Regina
+ SETTING BUTTONS:
 **************************************/
 
 h5 {
@@ -309,29 +344,104 @@ h5 {
 }
 
 .settings {
-  /* border: thin solid #f00; */
   display: flex;
   flex-direction: column;
-  background-color: #1475CC;
-  position: absolute;
-  top: 15%;
-  left: 50%;
-  transform: translate(-50%, -15%);
+  background-color: #42B34F;
   width: 500px;
+  margin-top: 50px;
+  margin-left: 50px;
+  float: left;
 }
-/* #settings button {
-  width: 100%;
-} */
+
 .form-content {
   display:inline-flex;
-  margin: 10px;
-  padding: 10px;
-}
-.form-input {
+  margin: 10px 7px 0 10px;
   padding: 10px;
 }
 
+fieldset:first-of-type {
+  position: relative;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
 
+#avail-days {
+  position: relative;
+  left: 40px;
+}
+
+#add-employee, #add-business-day {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+
+
+/**************************************
+ Show Employee Object on Menu page:
+**************************************/
+
+#employee-object, #timetable-object {
+  position: relative;
+  float: left;
+  overflow: hidden;
+  width: 300px;
+  height: 500px;
+  margin: 50px 0 0 50px;
+  font-size: .8em;
+  color: #ccc;
+  border: 1px solid #ccc;
+}
+
+#assigned-shifts-object {
+  position: relative;
+  float: left;
+  overflow: hidden;
+  width: 300px;
+  height: 500px;
+  margin: 50px 0 0 50px;
+  font-size: .8em;
+  color: #ccc;
+  border: 1px solid #ccc;
+}
+
+h3 {
+  position: absolute;
+  width: 300px;
+  height: 30px;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+.fade-out-text {
+  position: absolute;
+  width: 100%;
+  height: 70px;
+  top: 430px;
+  background: linear-gradient(rgba(34,47,61,0), rgba(34,47,61,1));
+  z-index: 4;
+}
+
+.scroll-texts {
+  position: absolute;
+  top: 35px;
+  height: 460px;
+  width: 320px; /* extra 20px hides scrollbar */
+  overflow: hidden;
+  overflow-y: scroll;
+}
+
+.menu-text {
+  height: 450px;
+  padding: 7px;
+}
+
+#settings-buttons {
+  position: relative;
+  float: left;
+  margin: 50px 0 0 50px;
+}
 
 
 /**************************************
@@ -341,8 +451,6 @@ h5 {
 .hide {
   transition: 0.4s;
   height: 0;
-  /* z-index: -1; */
-  /* display: none; */
   visibility: hidden;
 }
 
@@ -352,35 +460,8 @@ h5 {
 }
 
 
-/**************************************
- NAVIGATION BUTTON by David
- (requires Bootstrap)
-**************************************/
-
-/* #navigationButton {
-  background-color: transparent;
-  background-repeat:no-repeat;
-  border: 1px solid #ccc;
-  cursor: pointer;
-  overflow: hidden;
-  outline: none;
-  width: 40px;
-  height: 40px;
-  display: block;
-  position: absolute;
-  top: 10px;
-  left: 50px;
-} */
-
-/*
-#navigationButton:hover {
-  color: blue;
-}
-*/
-
-
 /**********************************************
- MEDIA QUERIES:
+ MEDIA QUERIES (WORK IN PROGRESS...):
 **********************************************/
 
 @media (orientation: portrait) {
@@ -391,6 +472,6 @@ h5 {
 
 @media (max-aspect-ratio: 4/5) {
   .time {
-  transform: rotate(45deg);
+  transform: rotate(45deg) translateX(-1px) translateY(15px);
   }
 }
