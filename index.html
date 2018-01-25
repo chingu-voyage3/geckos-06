@@ -4,7 +4,6 @@
 <head>
   <title>Time Trapper</title>
   <meta charset="utf-8">
-  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous"> -->
   <link rel="stylesheet" type="text/css" href="geckos6.css">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans%7CRoboto" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,15 +17,12 @@
 <header>
 
 <nav></nav>
-  <!-- <h1>Chingu team Geckos-6 Project</h1> -->
   <h2><ins>Time Trapper</ins></h2>
 
 </header>
 
 
 <main id="schedule">
-
-  <!-- <section id="schedule"> -->
 
   <div id="left-legend">
     <div id="upper-left-square">
@@ -218,7 +214,7 @@
   <h1>Time Trapper</h1>
   <button id="hide-menu">x</button>
 
-  <section class="settings"> <!-- ZZ (changed from id) -->
+  <section class="settings">
 
     <h5>SETTINGS</h5>
 
@@ -234,18 +230,18 @@
         </label>
         <br />
         <div id="avail-days">
-          <input type="checkbox" name="weekday" value="Monday" /><span> Monday</span><br/>
-          <input type="checkbox" name="weekday" value="Tuesday" /><span> Tuesday</span><br/>
-          <input type="checkbox" name="weekday"value="Wednesday" /><span> Wednesday</span><br/>
-          <input type="checkbox" name="weekday"value="Thursday" /><span> Thursday</span><br/>
-          <input type="checkbox" name="weekday" value="Friday" /><span> Friday</span><br/>
-          <input type="checkbox" name="weekday"value="Saturday" /><span> Saturday</span><br/>
-          <input type="checkbox" name="weekday" value="Sunday" /><span> Sunday</span><br/>
+          <input type="checkbox" name="weekday" value="1" /><span> Monday</span><br/>
+          <input type="checkbox" name="weekday" value="2" /><span> Tuesday</span><br/>
+          <input type="checkbox" name="weekday" value="3" /><span> Wednesday</span><br/>
+          <input type="checkbox" name="weekday" value="4" /><span> Thursday</span><br/>
+          <input type="checkbox" name="weekday" value="5" /><span> Friday</span><br/>
+          <input type="checkbox" name="weekday" value="6" /><span> Saturday</span><br/>
+          <input type="checkbox" name="weekday" value="7" /><span> Sunday</span><br/>
         </div>
         <label class="form-content">Maximum available hours per week:
         </label>
         <input id="max-hours" type="number" min="4" step="4" name="maxHours" style="width: 50px" required />
-        <input id="submit-employee" type="submit" name="employee" value="add" />
+        <input id="add-employee" type="button" name="employee" value="add" />
       </fieldset>
     </form>
 
@@ -253,11 +249,11 @@
     <fieldset>
       <legend><strong>Business Settings</strong>
       </legend>
-        <label id="adjust-up" class="form-content">
+        <label class="form-content">
           Add Business Days:
         </label>
-        <select id="business-day" name="day" multiple required>
-          <option value="Monday" selected>Monday</option>
+        <select id="business-day" name="day">
+          <option value="Monday">Monday</option>
           <option value="Tuesday">Tuesday</option>
           <option value="Wednesday">Wednesday</option>
           <option value="Thursday">Thursday</option>
@@ -275,11 +271,10 @@
         <input id="close" type="time" min="07:00" max="21:00" name="close" value="18:00" required>
         <label class="form-content">Set employees per shift:
         </label>
-        <input id="num-shifts" type="number" min="1" name="staffRequired" style="width: 50px" required />
-        <input id="submit-business-day" type="submit" name="submit-business-day" value="add">
+        <input id="num-shifts" type="number" min="1" max="3" name="staffRequired" style="width: 50px" required />
+        <input id="add-business-day" type="button" name="add-business-day" value="add">
       </fieldset>
     </form>
-    <!-- <input id="settings-input" type="text" placeholder="..." /> -->
 
   </section>
 
@@ -296,9 +291,9 @@
     </div>
   </div>
 
-  <div id="assigned-shifts-object">
-    <h3>Assigned shifts</h3>
-    <div id="effect2" class="fade-out-text">
+  <div id="timetable-object">
+    <h3>Timetable object</h3>
+    <div class="fade-out-text">
     </div>
 
     <div class="scroll-texts">
@@ -307,13 +302,27 @@
     </div>
   </div>
 
+  <div id="assigned-shifts-object">
+    <h3>Assigned shifts</h3>
+    <div id="effect1" class="fade-out-text">
+    </div>
+
+    <div class="scroll-texts">
+      <p id="paragraph3" class="menu-text">
+      </p>
+    </div>
+  </div>
+
   <section id="settings-buttons">
 
-  <button id="demo" type="button" name="demo">demo</button>
+  <button id="demo" type="button" name="demo" title="click to add demo data">demo</button>
   <br />
-  <button id="save-all" type="button" name="clear demo">save all</button>
+  <button id="create-schedule" type="button" name="create schedule" title="click once you have entered data to create your schedule" disabled>create schedule</button>
   <br />
-  <button id="clear-all" type="button" name="clear demo">clear all</button>
+  <button id="clear-all" type="button" name="clear demo" title="click to clear all entries or demo data" disabled>clear all</button>
+  <br />
+  <button id="save-all" type="button" name="clear demo" title="feature not yet available" disabled>save all</button>
+  <br />
 
   </section>
 
@@ -322,10 +331,7 @@
 
 <!-- SCRIPTS ******************** -->
 
-  <!-- <script type="text/javascript" src="jquery-3.1.1.min.js">
-  </script> -->
-
-  <script type="text/javascript" src="myObjects.js" defer>
+  <script type="text/javascript" src="demoObjects.js" defer>
   </script>
 
   <script type="text/javascript" src="geckos6.js" defer>

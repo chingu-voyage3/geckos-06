@@ -27,37 +27,40 @@ const geckos6AppModule = (function() {
     hideMenu: document.getElementById('hide-menu'),
     settingsButtons: document.querySelectorAll('#settings > button'),
     employeeObject: document.getElementById('employee-object'),
+    timeTableObject: document.getElementById('timetable-object'),
     assignedShiftsObject: document.getElementById('assigned-shifts-object'),
     scroll: document.getElementsByClassName('scroll-texts'),
     effect1: document.getElementById('effect1'),
-    effect2: document.getElementById('effect2'),
     shiftAll: document.querySelectorAll('[class*="shift"]'),
     emplName: document.getElementById('employee-name'),
     availDays: document.getElementById('avail-days'),
     maxHours: document.getElementById('max-hours'),
-    submitEmployee: document.getElementById('submit-employee'),
+    addEmployee: document.getElementById('add-employee'),
     businessDay: document.getElementById('business-day'),
     open: document.getElementById('open'),
     close: document.getElementById('close'),
+    paragraph1: document.getElementById('paragraph1'),
+    paragraph2: document.getElementById('paragraph2'),
+    paragraph3: document.getElementById('paragraph3'),
     demo: document.getElementById('demo'),
+    createSchedule: document.getElementById('create-schedule'),
     saveAll: document.getElementById('save-all'),
     clearAll: document.getElementById('clear-all'),
     numShifts: document.getElementById('num-shifts'),
-    submitBusinessDay: document.getElementById('submit-business-day')
+    addBusinessDay: document.getElementById('add-business-day')
   };
 
-  console.log(''); // for testing cacheDom
 
   /*****************************************
    Schedule Maker algorithm:
   *****************************************/
 
   // variables setup:
-  const employeeArr1 = [];
+  var employeeArr1 = [];
   var employeeArr2 = [];
   var employeeArr3 = [];
-  const shiftsArr1 = [];
-  const shiftsArr2 = [];
+  var shiftsArr1 = [];
+  var shiftsArr2 = [];
   var assignedShiftsObj1 = {};
   var assignedShiftsObj2 = {};
 
@@ -201,16 +204,6 @@ const geckos6AppModule = (function() {
     }
   };
 
-  // employee match function:
-  // const matchAvailEmpl = function(num) {
-  //   let search = new RegExp(num);
-  //   let rule = function(x) {
-  //     if ( x.match(search) ) {
-  //       return x;
-  //     }
-  //   }
-  // }
-
   // Final Shift Assigner function:
   const assignedShiftsObj2Maker = function(edit) {
     let lgt;
@@ -220,8 +213,8 @@ const geckos6AppModule = (function() {
     else {
       lgt = employeeArr3.length;
     }
-    console.log('employeeArr3 before: ', employeeArr3);
-    console.log('employeeArr3 length before: ', employeeArr3.length);
+    // console.log('employeeArr3 before: ', employeeArr3);
+    // console.log('employeeArr3 length before: ', employeeArr3.length);
     for ( let i = 0; i < lgt; i++ ) {
       let num = shiftsArr2[i].charAt(0);
       // console.log(num, typeof num);
@@ -232,7 +225,6 @@ const geckos6AppModule = (function() {
           return element;
         }
       }
-      // let empl = employeeArr3.find(rule.bind(null, index));
       let remove1;
       let shift = shiftsArr2[i];
       let empl = employeeArr3.find(function(element, index) {
@@ -260,65 +252,114 @@ const geckos6AppModule = (function() {
   const createEmployees = function(name, maxHours, avail) {
       let employeeName = name;
       employees[employeeName] = { maxHours, avail };
-    };
+  };
 
   const createTimetable = function(day, open, close, staffRequired) {
-    timetable[day][open] = open;
-    timetable[day][close] = close;
-    timetable[day][staffRequired] = staffRequired;
+    timetable[day] = {};
+    timetable[day].open = Number(open);
+    timetable[day].close = Number(close);
+    timetable[day].staffRequired = Number(staffRequired);
+    console.log(timetable);
+    cacheDom.createSchedule.removeAttribute('disabled');
   };
+
+  // create array of employee's available days: //ZZ
+  function getAvailDays() {
+    let weekdays = cacheDom.availDays.childNodes;
+    let checkboxes = [];
+    weekdays.forEach(function(node) {
+      // console.log(node);
+      if ( node.type === 'checkbox' ) {
+        if ( node.checked ) {
+          checkboxes.push(Number(node.value));
+        }
+      }
+    });
+    console.log('checkboxes: ', checkboxes);
+    return checkboxes;
+  }
 
 
   /*****************************************
    run all scheduling functions:
   *****************************************/
 
-  const createAll = (function() {
-    employeeArr1Maker(); //repl.it indicating 'too many errors' but it's working fine!
+  const createAll = function() {
+    employeeArr1Maker();
     employeeArr2Maker();
     employeeArr3Maker();
     shiftsArr1Maker('num');
     shiftsArr2Maker();
     assignedShiftsObj1Maker();
     assignedShiftsObj2Maker('edit'); // cleanup result
-    // createEmployees();
-    // createTimetable();
-  })();
+  };
+
+  const clearAll = function() {
+    employees = {};
+    timetable = {};
+    employeeArr1 = [];
+    employeeArr2 = [];
+    employeeArr3 = [];
+    shiftsArr1 = [];
+    shiftsArr2 = [];
+    assignedShiftsObj1 = {};
+    assignedShiftsObj2 = {};
+    displayEmplObj();
+    displayTimetableObj();
+    displayAssignedShiftsObj();
+    eraseShiftBars();
+    hideEmptyShiftBars();
+    cacheDom.demo.removeAttribute('disabled');
+    cacheDom.clearAll.setAttribute('disabled', true);
+    cacheDom.paragraph1.innerHTML = "";
+    cacheDom.paragraph2.innerHTML = "";
+    };
 
 
   /*****************************************
    Display employee object to menu page:
   *****************************************/
 
-  // var output = '';
-  // for ( var property in employees ) {
-  //   output += property + ': ' + employees[property] +'; ';
-  // }
-  // or
-  // cacheDom.employeeObject.innerText = JSON.stringify(employees); //output;
+  const displayEmplObj = function() {
+    let text = '';
+    Object.keys(employees).forEach(function(name) {
+      let maxHours = employees[name].maxHours;
+      let avail = employees[name].avail;
+      text += `<ins>${name}</ins>: &nbsp&nbsp max hours: ${maxHours} / avail: ${avail}</br>`;
+    });
+    cacheDom.paragraph1.innerHTML = text;
+  };
 
-  let text1 = '';
-  Object.keys(employees).forEach(function(name) {
-    let maxHours = employees[name].maxHours;
-    let avail = employees[name].avail;
-    text1 += `<ins>${name}</ins>: &nbsp&nbsp max hours: ${maxHours} /  avail: ${avail}</br>`;
-  });
-  let paragraph1 = document.getElementById('paragraph1');
-  paragraph1.innerHTML = text1;
+
+  /*****************************************
+   Display timetable object to menu page:
+  *****************************************/
+
+  const displayTimetableObj = function() {
+    let text = '';
+    Object.keys(timetable).forEach(function(day) {
+      let open = timetable[day].open;
+      let close = timetable[day].close;
+      let staffRequired = timetable[day].staffRequired;
+      text += `<ins>${day}</ins>: &nbsp&nbsp open: ${open} / close: ${close} / staff required per shift: ${staffRequired}</br>`;
+    });
+    cacheDom.paragraph2.innerHTML = text;
+  };
+
 
 
   /*****************************************
    Display assigned shifts object to menu page:
   *****************************************/
 
-  // let text2 = `<h3>Assigned shifts</h3><br/>`;
-  let text2 = '';
-  for ( var shift in assignedShiftsObj2 ) {
-    let name = assignedShiftsObj2[shift];
-    text2 += `<ins>${shift}</ins>: &nbsp&nbsp ${name}</br>`;
+  const displayAssignedShiftsObj = function() {
+    let text = '';
+    for ( var shift in assignedShiftsObj2 ) {
+      let name = assignedShiftsObj2[shift];
+      text += `<ins>${shift}</ins>: &nbsp&nbsp ${name}</br>`;
+    };
+    cacheDom.paragraph3.innerHTML = text;
   };
-  let paragraph2 = document.getElementById('paragraph2');
-  paragraph2.innerHTML = text2;
 
 
   /*****************************************
@@ -327,34 +368,7 @@ const geckos6AppModule = (function() {
    info extracted from assignedShiftsObj2:
   *****************************************/
 
-  /*
-  // only for 1st shift (testing - it works):
-
-  function createShift1() {
-    let lgt = cacheDom.shift1.length;
-    let obj = assignedShiftsObj2;
-    let employee = Object.values(obj)[1];
-    let start = Object.keys(obj)[1].split(' ')[2];
-    let end = Object.keys(obj)[1].split(' ')[4];
-    let dayLength = 14;
-    let barLeft = Math.round((start - 7 + 0.01) / 14) * 100;
-    let barWidth = (end - start + 0.01) / 14 * 100;
-    cacheDom.shift1[0].style.left = barLeft + '%';
-    cacheDom.shift1[0].style.width = barWidth + '%';
-    for ( let i = 0; i < lgt; i++ ) {
-      cacheDom.shift1[i].textContent = `${employee}:  ${start} to ${end}`;
-    }
-  }
-
-  // manipulate shift1 bar (testing):
-
-  set width of shift1 bar (for testing only):
-  cacheDom.shift1[0].style.left = '1%';
-  cacheDom.shift1[0].style.width = '50%';
-  */
-
   // Create schedule grid bars for all shifts:
-
   function positionShiftBar(element, start, end) {
     let hour = 100 / 15;
     let shiftLength = end - start;
@@ -376,7 +390,7 @@ const geckos6AppModule = (function() {
     element.innerHTML = `${employee}:  &nbsp &nbsp ${start} to ${end}`;
   }
 
-  function createShifts() {
+  function createShiftBars() {
     let obj = assignedShiftsObj2;
     let dayIndex = 1;
     let shiftIndex = 1;
@@ -392,34 +406,48 @@ const geckos6AppModule = (function() {
         shiftIndex = 1;
         dayIndex++
       }
-      console.log(day);
+      // console.log(day);
       let id = `#day${day}`;
-      // let div = document.getElementById(id).childNodes;
       let shiftBar = `.shift${shiftIndex}`;
       // console.log(div.childNodes[1]);
-      // let element = document.querySelector(`${id} ${shiftBar}`);
       let element = document.querySelector(id).querySelector(shiftBar);
-      console.log(element);
+      // console.log(element);
       positionShiftBar(element, start, end);
       nameShiftBar(element, employee, start, end);
       shiftIndex++;
     }
   }
 
-  // createShift1();
-  createShifts();
+  // Remove shift bars if unused:
+  function hideEmptyShiftBars(reset) {
+    cacheDom.shiftAll.forEach(function(node) {
+      if ( reset === 'yes' ) {
+        if ( node.nodeType === 1 ) {
+          node.style.visibility = 'visible';
+        }
+      }
+      else {
+        if ( node.nodeType === 1 ) {
+          if ( !node.style.width ) {
+            node.style.visibility = 'hidden';
+          }
+        }
+      }
+    });
+  };
 
+  hideEmptyShiftBars(); // run it once at start
 
-  /*****************************************
-   Set height of vertical lines (CSS manip)
-   No longer required as I figured out the CSS
-  *****************************************/
-
-  // let lines = cacheDom.line;
-  // let scheduleHeight = cacheDom.schedule.getBoundingClientRect().height + 'px';
-  // for ( let i = 0; i < lines.length; i++ ) {
-  //   lines[i].style.height = scheduleHeight;
-  // }
+  function eraseShiftBars() {
+    cacheDom.shiftAll.forEach(function(element) {
+      if ( element.nodeType === 1 ) {
+        element.style.left = null;
+        // element.style.width = '100%';
+        element.style.width = null;
+        element.innerHTML = "";
+      }
+    });
+  }
 
 
   /*****************************************
@@ -437,72 +465,80 @@ const geckos6AppModule = (function() {
   }
 
   cacheDom.showMenu.addEventListener('click', showMenu, false);
-
   cacheDom.hideMenu.addEventListener('click', hideMenu, false);
 
-
-  // ZZ
-
-  // create array of employee's available days:
-  (function getAvailDays() {
-    let weekdays = cacheDom.availDays.childNodes;
-    let checkboxes = [];
-    for ( var input in weekdays ) {
-      if ( input.nodeName === 'input' ) {
-        
-      }
-    }
-    console.log('weekdays: ', weekdays);
-  })()
-
-  cacheDom.submitEmployee.addEventListener('click', function() {
+  cacheDom.addEmployee.addEventListener('click', function() {
     let name = cacheDom.emplName.value;
-    // let cacheDom.availDays.value;
+    let avail = getAvailDays();
     let maxHours = cacheDom.maxHours.value;
-    createEmployees();
+    createEmployees(name, maxHours, avail);
+    displayEmplObj();
   }, false);
 
-  cacheDom.submitBusinessDay.addEventListener('click', function() {
-
+  cacheDom.addBusinessDay.addEventListener('click', function() {
+    let day = cacheDom.businessDay.value;
+    console.log('cacheDom.businessDay: ', cacheDom.businessDay.value);
+    console.log('day: ', day);
+    let open = cacheDom.open.value.substr(0,2);
+    console.log('open: ', open);
+    let close = cacheDom.close.value.substr(0,2);;
+    console.log('close: ', close);
+    let staffRequired = cacheDom.numShifts.value;
+    createTimetable(day, open, close, staffRequired);
+    displayTimetableObj();
   }, false);
 
-  cacheDom.demo.addEventListener('click', function() {
+  function createDemo() {
+    hideEmptyShiftBars('yes');
+    createDemoObj();
+    createAll();
+    displayEmplObj();
+    displayTimetableObj();
+    displayAssignedShiftsObj();
+    createShiftBars();
+    hideEmptyShiftBars();
+    cacheDom.demo.setAttribute('disabled', true);
+    cacheDom.clearAll.removeAttribute('disabled');
+  }
 
-  }, false);
+  function createSchedule() {
+    hideEmptyShiftBars('yes');
+    createAll();
+    displayEmplObj();
+    displayTimetableObj();
+    displayAssignedShiftsObj();
+    createShiftBars();
+    hideEmptyShiftBars();
+    // cacheDom.createSchedule.setAttribute('disabled', true);
+    cacheDom.clearAll.removeAttribute('disabled');
+  }
 
-  cacheDom.saveAll.addEventListener('click', function() {
+  cacheDom.demo.addEventListener('click', createDemo, false);
 
-  }, false);
+  cacheDom.createSchedule.addEventListener('click', createSchedule, false);
 
   cacheDom.clearAll.addEventListener('click', function() {
-
+    var clearOnlyIfConfirmed = window.confirm('Ok to clear All? Beware, this will clear all your entries. It also clears the demo data');
+    if ( clearOnlyIfConfirmed ) {
+      clearAll();
+    }
   }, false);
 
 
   // Remove text fade-out effect when scrolled to bottom:
-  cacheDom.scroll[1].addEventListener('scroll', function(event) {
+  cacheDom.scroll[2].addEventListener('scroll', function(event) {
     var element = event.target;
     if ( element.scrollHeight - element.scrollTop === element.clientHeight )
     {
-      cacheDom.effect2.classList.remove('fade-out-text');
-      console.log('scrolled');
+      cacheDom.effect1.classList.remove('fade-out-text');
+      // console.log('scrolled');
     }
-    else { cacheDom.effect2.classList.add('fade-out-text');
+    else { cacheDom.effect1.classList.add('fade-out-text');
     }
   }, false);
 
 
-  // Remove shift bars if unused:
-  for ( let i = 0; i < cacheDom.shiftAll.length; i++ ) {
-    if ( cacheDom.shiftAll[i].nodeType === 1 ) {
-      if ( !cacheDom.shiftAll[i].style.width ) {
-      cacheDom.shiftAll[i].style.display = 'none';
-      }
-    }
-  };
-
   // Prevent scrolling of menu page when cursor inside scrollable objects:
-
   function hideOverflow() {
     document.body.style.overflowY = "hidden";
   }
@@ -513,18 +549,16 @@ const geckos6AppModule = (function() {
 
   cacheDom.employeeObject.addEventListener('mouseover', hideOverflow, false);
 
+  cacheDom.timeTableObject.addEventListener('mouseover', hideOverflow, false);
+
   cacheDom.assignedShiftsObject.addEventListener('mouseover', hideOverflow, false);
 
   cacheDom.employeeObject.addEventListener('mouseout', showOverflow, false);
 
+  cacheDom.timeTableObject.addEventListener('mouseout', hideOverflow, false);
+
   cacheDom.assignedShiftsObject.addEventListener('mouseout', showOverflow, false);
 
-
-return {
-  test: function() {
-    console.log(cacheDom.shift);
-  }
-};
 
 })();
 
@@ -533,6 +567,6 @@ return {
 **  AUTHOR:  Team Geckos-6
 ** PROJECT:  Chingu Voyage 3
 **    DATE:  Dec 2017-Jan 2018
-** VERSION:  1.10
+** VERSION:  1.18
 ********************************************
 *******************************************/
