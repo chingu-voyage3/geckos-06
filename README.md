@@ -49,5 +49,8 @@ Our members are:
   * Currently working on a better design  
 
   
-  **LAUNCH DATE: JANUARY 24th 2018**
+  **LAUNCH DATE: JANUARY 24th 2018 - MVP HAS BEEN SUBMITTED!!**
+  
+  Here it is (with many bugs and not mobile-friendly, yet):
+  https://chingu-voyage3.github.io/geckos-06
   
