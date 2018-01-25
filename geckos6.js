@@ -555,7 +555,7 @@ const geckos6AppModule = (function() {
 
   cacheDom.employeeObject.addEventListener('mouseout', showOverflow, false);
 
-  cacheDom.timeTableObject.addEventListener('mouseout', hideOverflow, false);
+  cacheDom.timeTableObject.addEventListener('mouseout', showOverflow, false);
 
   cacheDom.assignedShiftsObject.addEventListener('mouseout', showOverflow, false);
 
