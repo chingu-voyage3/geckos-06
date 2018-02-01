@@ -3,7 +3,7 @@
 **  AUTHOR:  Team Geckos-6
 ** PROJECT:  Chingu Voyage 3
 **    DATE:  Dec 2017-Jan 2018
-** VERSION:  1.10
+** VERSION:  1.18
 ********************************************
 *******************************************/
 
@@ -24,11 +24,14 @@ const geckos6AppModule = (function() {
     settingsInput: document.getElementById('settings-input'),
     aside: document.getElementsByTagName('aside')[0],
     showMenu: document.getElementById('show-menu'),
+    hideMenuNav: document.getElementById('hide-menu-nav'),
+    showMenuNav: document.getElementById('show-menu-nav'),
     hideMenu: document.getElementById('hide-menu'),
     settingsButtons: document.querySelectorAll('#settings > button'),
     employeeObject: document.getElementById('employee-object'),
     timeTableObject: document.getElementById('timetable-object'),
     assignedShiftsObject: document.getElementById('assigned-shifts-object'),
+    objectTextFields: document.getElementById('object-text-fields'),
     scroll: document.getElementsByClassName('scroll-texts'),
     effect1: document.getElementById('effect1'),
     shiftAll: document.querySelectorAll('[class*="shift"]'),
@@ -43,12 +46,59 @@ const geckos6AppModule = (function() {
     paragraph2: document.getElementById('paragraph2'),
     paragraph3: document.getElementById('paragraph3'),
     demo: document.getElementById('demo'),
-    createSchedule: document.getElementById('create-schedule'),
+    createSchedule: document.getElementById('create'),
     saveAll: document.getElementById('save-all'),
     clearAll: document.getElementById('clear-all'),
     numShifts: document.getElementById('num-shifts'),
-    addBusinessDay: document.getElementById('add-business-day')
+    addBusinessDay: document.getElementById('add-business-day'),
+    flexContainer: document.getElementById('flex-container')
   };
+
+
+  /********************************************
+   Vue Instance: session-time (in nav bar)
+  ********************************************/
+
+  Vue.component('session-time', {
+    //props: ['alpha'],
+    template: '<span v-html="beta + alpha"></span>',
+    data: function() {
+      return {
+        beta: '',
+        alpha: 'session opened!',
+        hours: null, // enter hour or undefined/null
+        minutes: null // enter minute or undefined/null
+      }
+    },
+    methods: {
+      session: function() {
+        this.alpha = timeRelatedFunctions.sessionTime(this.hours,this.minutes)
+      }
+    },
+    mounted() {
+      this.interval = setInterval(this.session, 1000),
+      this.beta = timeRelatedFunctions.displayTimeOpened(this.hours,this.minutes)
+    }
+  });
+
+  var sessionTimeComponent = new Vue({
+    el: '#sessionTimeComponent'
+  });
+
+
+  /********************************************
+   Vue Instance: today-date (in nav bar)
+  ********************************************/
+
+  var todayDateInstance = new Vue({
+    el: '#todayDateInstance',
+    data: {},
+    methods: {
+      todayDate: function() {
+        return 'Today is ' + timeRelatedFunctions.todayDate();
+      }
+    }
+  });
 
 
   /*****************************************
@@ -61,7 +111,7 @@ const geckos6AppModule = (function() {
   var employeeArr3 = [];
   var shiftsArr1 = [];
   var shiftsArr2 = [];
-  var assignedShiftsObj1 = {};
+  // var assignedShiftsObj1 = {};
   var assignedShiftsObj2 = {};
 
   // Sample employees object in external file named 'myObjects.js'
@@ -125,6 +175,7 @@ const geckos6AppModule = (function() {
       y = x.slice(11, x.length);
       return y;
     });
+    console.log('employeeArr3: ' + employeeArr3);
   };
 
   // create initial array of shift slots (creates sub-arrays):
@@ -187,26 +238,28 @@ const geckos6AppModule = (function() {
         shiftsArr2.push(shiftsArr1[i][j]);
       }
     }
+    // console.log('shiftsArr2: ', shiftsArr2);
   };
 
   // assign employee names for every shift slot
   // stops when it runs out of shifts or names, whichever comes first:
-  const assignedShiftsObj1Maker = function() {
-    let lgt;
-    if ( employeeArr3.length > shiftsArr2.length ) {
-      lgt = shiftsArr2.length;
-    }
-    else {
-      lgt = employeeArr3.length;
-    }
-    for ( let i = 0; i < lgt; i++ ) {
-      assignedShiftsObj1[i + '. ' + shiftsArr2[i]] = employeeArr3[i];
-    }
-  };
+  // const assignedShiftsObj1Maker = function() {
+  //   let lgt;
+  //   if ( employeeArr3.length > shiftsArr2.length ) {
+  //     lgt = shiftsArr2.length;
+  //   }
+  //   else {
+  //     lgt = employeeArr3.length;
+  //   }
+  //   for ( let i = 0; i < lgt; i++ ) {
+  //     assignedShiftsObj1[i + '. ' + shiftsArr2[i]] = employeeArr3[i];
+  //   }
+  // };
 
   // Final Shift Assigner function:
   const assignedShiftsObj2Maker = function(edit) {
     let lgt;
+    console.log('employeeArr3: ', employeeArr3);
     if ( employeeArr3.length > shiftsArr2.length ) {
       lgt = shiftsArr2.length;
     }
@@ -218,28 +271,37 @@ const geckos6AppModule = (function() {
     for ( let i = 0; i < lgt; i++ ) {
       let num = shiftsArr2[i].charAt(0);
       // console.log(num, typeof num);
-      let search = new RegExp(num);
-      // employee match function:
-      let rule = function(element, index) {
-        if ( element.match(search) ) {
-          return element;
-        }
-      }
+      // let search = new RegExp(num);
+      // employee match function (not used):
+      // let rule = function(element, index) {
+      //   if ( element.match(search) ) {
+      //     return element;
+      //   }
+      // }
       let remove1;
       let shift = shiftsArr2[i];
       let empl = employeeArr3.find(function(element, index) {
         remove1 = index;
-        // console.log(remove1, i);
-        return element.match(search);
+        return element.match(num);
       });
       let j = (i + 1).toString().padStart(2, '0');
       if ( edit === 'edit' ) {
-        empl = empl.match(/[A-Za-z]+/g).join(' ');
-        shift = shift.substring(2, shift.length);
+        if ( empl ) {
+          empl = empl.match(/[A-Za-z]+/g).join(' ');
+        }
+        else {
+          empl = 'no one available!'
+          lgt++;
+        }
+      shift = shift.substring(2, shift.length);
       }
       assignedShiftsObj2[j + ' ' + shift] = empl;
-      let remove2 = employeeArr3.indexOf(empl);
-      employeeArr3.splice(remove1, 1);
+      // let remove2 = employeeArr3.indexOf(empl);
+      if ( remove1 < (employeeArr3.length - 1) ) {
+        employeeArr3.splice(remove1, 1);
+        console.log('remove1: ', remove1);
+        console.log('employeeArr3: ', employeeArr3);
+      }
     }
   };
 
@@ -259,11 +321,11 @@ const geckos6AppModule = (function() {
     timetable[day].open = Number(open);
     timetable[day].close = Number(close);
     timetable[day].staffRequired = Number(staffRequired);
-    console.log(timetable);
+    // console.log(timetable);
     cacheDom.createSchedule.removeAttribute('disabled');
   };
 
-  // create array of employee's available days: //ZZ
+  // create array of employee's available days:
   function getAvailDays() {
     let weekdays = cacheDom.availDays.childNodes;
     let checkboxes = [];
@@ -275,7 +337,7 @@ const geckos6AppModule = (function() {
         }
       }
     });
-    console.log('checkboxes: ', checkboxes);
+    // console.log('checkboxes: ', checkboxes);
     return checkboxes;
   }
 
@@ -290,7 +352,7 @@ const geckos6AppModule = (function() {
     employeeArr3Maker();
     shiftsArr1Maker('num');
     shiftsArr2Maker();
-    assignedShiftsObj1Maker();
+    // assignedShiftsObj1Maker();
     assignedShiftsObj2Maker('edit'); // cleanup result
   };
 
@@ -302,7 +364,7 @@ const geckos6AppModule = (function() {
     employeeArr3 = [];
     shiftsArr1 = [];
     shiftsArr2 = [];
-    assignedShiftsObj1 = {};
+    // assignedShiftsObj1 = {};
     assignedShiftsObj2 = {};
     displayEmplObj();
     displayTimetableObj();
@@ -390,6 +452,12 @@ const geckos6AppModule = (function() {
     element.innerHTML = `${employee}:  &nbsp &nbsp ${start} to ${end}`;
   }
 
+  function greyOutShiftBar(element, employee) {
+    if ( employee === 'no one available!' ) {
+      element.style.backgroundColor = `#555`;
+    }
+  }
+
   function createShiftBars() {
     let obj = assignedShiftsObj2;
     let dayIndex = 1;
@@ -414,6 +482,7 @@ const geckos6AppModule = (function() {
       // console.log(element);
       positionShiftBar(element, start, end);
       nameShiftBar(element, employee, start, end);
+      greyOutShiftBar(element, employee)
       shiftIndex++;
     }
   }
@@ -455,17 +524,27 @@ const geckos6AppModule = (function() {
   *****************************************/
 
   const hideMenu = function() {
-    cacheDom.aside.classList.add('hide');
-    cacheDom.aside.classList.add('hide2');
+    hideOverflow();
+    cacheDom.aside.classList.add('hideSwipe');
+    // cacheDom.aside.classList.add('hideFade');
+    cacheDom.flexContainer.classList.add('changeDisplay');
+    setTimeout(function() {
+      showOverflow();
+    },800); // match transition-duration
   }
 
   const showMenu = function() {
-    cacheDom.aside.classList.remove('hide');
-    cacheDom.aside.classList.remove('hide2');
+    hideOverflow();
+    cacheDom.aside.classList.remove('hideSwipe');
+    // cacheDom.aside.classList.remove('hideFade');
+    setTimeout(function() {
+      cacheDom.flexContainer.classList.remove('changeDisplay');
+      showOverflow();
+    },1000);
   }
 
-  cacheDom.showMenu.addEventListener('click', showMenu, false);
-  cacheDom.hideMenu.addEventListener('click', hideMenu, false);
+  cacheDom.showMenuNav.addEventListener('click', showMenu, false);
+  cacheDom.hideMenuNav.addEventListener('click', hideMenu, false);
 
   cacheDom.addEmployee.addEventListener('click', function() {
     let name = cacheDom.emplName.value;
@@ -477,12 +556,12 @@ const geckos6AppModule = (function() {
 
   cacheDom.addBusinessDay.addEventListener('click', function() {
     let day = cacheDom.businessDay.value;
-    console.log('cacheDom.businessDay: ', cacheDom.businessDay.value);
-    console.log('day: ', day);
+    // console.log('cacheDom.businessDay: ', cacheDom.businessDay.value);
+    // console.log('day: ', day);
     let open = cacheDom.open.value.substr(0,2);
-    console.log('open: ', open);
+    // console.log('open: ', open);
     let close = cacheDom.close.value.substr(0,2);;
-    console.log('close: ', close);
+    // console.log('close: ', close);
     let staffRequired = cacheDom.numShifts.value;
     createTimetable(day, open, close, staffRequired);
     displayTimetableObj();
@@ -509,7 +588,7 @@ const geckos6AppModule = (function() {
     displayAssignedShiftsObj();
     createShiftBars();
     hideEmptyShiftBars();
-    // cacheDom.createSchedule.setAttribute('disabled', true);
+    cacheDom.createSchedule.setAttribute('disabled', true);
     cacheDom.clearAll.removeAttribute('disabled');
   }
 
@@ -541,23 +620,28 @@ const geckos6AppModule = (function() {
   // Prevent scrolling of menu page when cursor inside scrollable objects:
   function hideOverflow() {
     document.body.style.overflowY = "hidden";
+    // document.body.style.marginRight = '17px';
   }
 
   function showOverflow() {
     document.body.style.overflowY = "unset";
   }
 
-  cacheDom.employeeObject.addEventListener('mouseover', hideOverflow, false);
+  cacheDom.objectTextFields.addEventListener('mouseover', hideOverflow, false);
 
-  cacheDom.timeTableObject.addEventListener('mouseover', hideOverflow, false);
+  cacheDom.objectTextFields.addEventListener('mouseout', showOverflow, false);
 
-  cacheDom.assignedShiftsObject.addEventListener('mouseover', hideOverflow, false);
-
-  cacheDom.employeeObject.addEventListener('mouseout', showOverflow, false);
-
-  cacheDom.timeTableObject.addEventListener('mouseout', showOverflow, false);
-
-  cacheDom.assignedShiftsObject.addEventListener('mouseout', showOverflow, false);
+  // cacheDom.employeeObject.addEventListener('mouseover', hideOverflow, false);
+  //
+  // cacheDom.timeTableObject.addEventListener('mouseover', hideOverflow, false);
+  //
+  // cacheDom.assignedShiftsObject.addEventListener('mouseover', hideOverflow, false);
+  //
+  // cacheDom.employeeObject.addEventListener('mouseout', showOverflow, false);
+  //
+  // cacheDom.timeTableObject.addEventListener('mouseout', showOverflow, false);
+  //
+  // cacheDom.assignedShiftsObject.addEventListener('mouseout', showOverflow, false);
 
 
 })();
