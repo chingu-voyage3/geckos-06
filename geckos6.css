@@ -12,10 +12,6 @@ body {
   align-items: center;
 }
 
-header {
-  margin: 0;
-}
-
 h1, h2 {
   text-align: center;
   margin-bottom: 10px;
@@ -26,12 +22,31 @@ h5 {
   margin: 0;
   font-size: 2vh;
 }
-
-#container {
-  display: flex;
+a {
+  text-decoration: none;
+  color: #222f3d;
+}
+ul {
+  align-items: flex-start;
   flex-direction: row;
+  list-style-type: none;
+}
+/**************************************
+ HOME PAGE
+**************************************/
+
+
+.big {
+  font-size: 3em;
+}
+.home {
+  background: linear-gradient(45deg, #42b34f 0%,#5ba2ad 60%,
+    #72746d 85%,#222f3d 100%);
 }
 
+/****************************
+  SCHEDULE PAGE
+*****************************/
 #schedule {
   position:relative;
   display: flex;
@@ -267,7 +282,7 @@ h5 {
 
 
 /**************************************
- Menu (settings page):
+      SETTINGS PAGE
 **************************************/
 
 aside {
@@ -378,7 +393,7 @@ fieldset:first-of-type {
 
 
 /**************************************
- Show Employee Object on Menu page:
+ Show Employee Object on SETTINGS page:
 **************************************/
 
 #employee-object, #timetable-object {

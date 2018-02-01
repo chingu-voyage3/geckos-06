@@ -64,7 +64,7 @@ const geckos6AppModule = (function() {
   var assignedShiftsObj1 = {};
   var assignedShiftsObj2 = {};
 
-  // Sample employees object in external file named 'myObjects.js'
+  // Sample employees object in external file named 'demoObjects.js'
 
   // create initial array of employee names with a repeat for every number of possible shifts:
   // identifier: 00-00-00-0-name-[avail]
