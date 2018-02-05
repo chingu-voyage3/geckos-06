@@ -15,11 +15,11 @@
 <body>
 
 
-<header>
+<header class="nav-header">
 
   <nav role="navigation" id="nav">
 
-    <h1>Time Trapper</h1>
+    <h1 class="h1-nav-bar">Time Trapper</h1>
 
     <div id="todayDateInstance">
       <p style="margin: 0; position: fixed; top: 10px; left: 10px;" v-html="todayDate()"></p>
@@ -29,15 +29,57 @@
       <session-time style="text-align: left;"></session-time> <!-- Vue component -->
     </div>
 
+    <button id="go-home" class="large material-icons">home</button>
+    <button id="show-menu-nav" class="large material-icons" disabled="true">settings</button>
     <button id="hide-menu-nav" class="large material-icons">schedule</button>
-    <button id="show-menu-nav" class="large material-icons">settings</button>
 
   </nav>
 
 </header>
 
 
-<div id="flex-container" class="displayNone">
+<!-- 1. HOME PAGE (WELCOME PAGE) -->
+
+<div id="welcome-page" class="display-flex left-position-zero">
+
+  <header class="welcome-header">
+    <!-- <div class="nav primary-nav">
+      <ul>
+        <li><a href="#">Home</a>
+        </li>
+        <li><a href="#">Settings</a></li>
+        <li><a href="#">Schedule</a></li>
+      </ul>
+    </div> -->
+
+  <h1 class="big h1-welcome">Time Trapper</h1>
+  </header>
+
+  <div>
+    <h2 class="h2-welcome">Take <em>less</em> time to create time(sheets)!</h2>
+    <h2 class="h2-welcome">Quick lightweight scheduling for businesses</h2>
+    <div class="features">
+      <h4>Follow these easy steps:</h4>
+      <ul>
+        <li>Enter your business days, hours and number of employees needed per shift.</li>
+        <li>Then enter your employees' names, days of availability, and maximum hours assigned.</li>
+        <li>Then let Time Trapper create your schedule for you.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div>
+    <p id="get-started">Get started =></p>
+  </div>
+
+</div>
+
+<!-- END OF HOME PAGE (WELCOME PAGE) -->
+
+
+<!-- 2. SCHEDULE/TIMETABLE PAGE -->
+
+<div id="schedule-container" class="display-none">
 
 <main id="schedule">
 
@@ -54,7 +96,7 @@
       <span>Saturday</span>
       <span>Sunday</span>
     </div>
-  </div> <!-- end of left-legend -->
+  </div>
 
   <div id="schedule-grid">
     <div id="vertical-line1" class="line">
@@ -223,22 +265,18 @@
 
 </main>
 
-
-
-<!-- <button id="show-menu" class="large material-icons">settings</button> -->
-<!-- <button id="show-menu">&#8801;</button> --> <!-- or &#9776 -->
-
 </div>
 
+<!-- END OF SCHEDULE/TIMETABLE PAGE -->
 
-<!-- THIS IS THE MAIN MENU (SETTINGS PAGE) -->
-<aside id="menu">
-  <!-- <h1>Time Trapper</h1> -->
-  <!-- <button id="hide-menu" class="large material-icons">schedule</button> -->
+
+<!-- 3. SETTINGS PAGE (MAIN MENU) -->
+
+<aside id="menu" class="display-none">
 
   <section class="settings">
 
-    <h2>SETTINGS</h2>
+    <h2 class="h2-settings">SETTINGS</h2>
 
     <form>
       <fieldset>
@@ -352,8 +390,10 @@
 
   </section>
 
-
 </aside>
+
+<!-- END OF SETTINGS PAGE (MAIN MENU) -->
+
 
 
 <!-- SCRIPTS ******************** -->
