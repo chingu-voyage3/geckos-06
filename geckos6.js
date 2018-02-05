@@ -10,6 +10,7 @@
 const geckos6AppModule = (function() {
 
   const cacheDom = {
+    welcomePage: document.getElementById('welcome-page'),
     shift1: document.getElementsByClassName('shift1'),
     shift2: document.getElementsByClassName('shift2'),
     shift3: document.getElementsByClassName('shift3'),
@@ -20,13 +21,13 @@ const geckos6AppModule = (function() {
     line: document.getElementsByClassName('line'),
     schedule: document.getElementById('schedule'),
     main: document.getElementsByTagName('main')[0],
+    getStarted: document.getElementById('get-started'),
     settings: document.getElementById('settings'),
     settingsInput: document.getElementById('settings-input'),
     aside: document.getElementsByTagName('aside')[0],
-    showMenu: document.getElementById('show-menu'),
+    goHome: document.getElementById('go-home'),
     hideMenuNav: document.getElementById('hide-menu-nav'),
     showMenuNav: document.getElementById('show-menu-nav'),
-    hideMenu: document.getElementById('hide-menu'),
     settingsButtons: document.querySelectorAll('#settings > button'),
     employeeObject: document.getElementById('employee-object'),
     timeTableObject: document.getElementById('timetable-object'),
@@ -51,7 +52,7 @@ const geckos6AppModule = (function() {
     clearAll: document.getElementById('clear-all'),
     numShifts: document.getElementById('num-shifts'),
     addBusinessDay: document.getElementById('add-business-day'),
-    flexContainer: document.getElementById('flex-container')
+    scheduleContainer: document.getElementById('schedule-container')
   };
 
 
@@ -101,9 +102,9 @@ const geckos6AppModule = (function() {
   });
 
 
-  /*****************************************
-   Schedule Maker algorithm:
-  *****************************************/
+/*****************************************
+ Schedule Maker algorithm:
+*****************************************/
 
   // variables setup:
   var employeeArr1 = [];
@@ -241,6 +242,7 @@ const geckos6AppModule = (function() {
     // console.log('shiftsArr2: ', shiftsArr2);
   };
 
+  // Notes:
   // assign employee names for every shift slot
   // stops when it runs out of shifts or names, whichever comes first:
   // const assignedShiftsObj1Maker = function() {
@@ -343,7 +345,7 @@ const geckos6AppModule = (function() {
 
 
   /*****************************************
-   run all scheduling functions:
+   Run all scheduling functions:
   *****************************************/
 
   const createAll = function() {
@@ -407,7 +409,6 @@ const geckos6AppModule = (function() {
     });
     cacheDom.paragraph2.innerHTML = text;
   };
-
 
 
   /*****************************************
@@ -523,26 +524,51 @@ const geckos6AppModule = (function() {
    Navigation functions & event listeners:
   *****************************************/
 
-  const hideMenu = function() {
+  const showWelcomePage = function() {
     hideOverflow();
-    cacheDom.aside.classList.add('hideSwipe');
-    // cacheDom.aside.classList.add('hideFade');
-    cacheDom.flexContainer.classList.add('changeDisplay');
+    cacheDom.welcomePage.classList.replace('left-position-100', 'left-position-zero');
+    // cacheDom.aside.classList.remove('display-flex');
+    adjustTopOnOffSP('off');
+    // setTimeout(function() {
+    //   showOverflow();
+    // },800); // match transition-duration
+  }
+
+  const hideWelcomePage = function() {
+    cacheDom.welcomePage.classList.replace('left-position-zero', 'left-position-100');
+    cacheDom.aside.classList.add('display-flex');
+    adjustTopOnOffWP('on');
+    setTimeout(function() {
+      showOverflow();
+    },800); // match transition-duration
+  }
+
+  const hideMenu = function() {
+    cacheDom.hideMenuNav.setAttribute('disabled', true);
+    cacheDom.showMenuNav.removeAttribute('disabled');
+    hideOverflow();
+    cacheDom.aside.classList.toggle('hide-swipe');
+    cacheDom.scheduleContainer.classList.add('display-flex');
+    adjustTopOnOffSP('on');
     setTimeout(function() {
       showOverflow();
     },800); // match transition-duration
   }
 
   const showMenu = function() {
+    cacheDom.showMenuNav.setAttribute('disabled', true);
+    cacheDom.hideMenuNav.removeAttribute('disabled');
     hideOverflow();
-    cacheDom.aside.classList.remove('hideSwipe');
-    // cacheDom.aside.classList.remove('hideFade');
+    cacheDom.aside.classList.toggle('hide-swipe');
+    adjustTopOnOffSP('off');
     setTimeout(function() {
-      cacheDom.flexContainer.classList.remove('changeDisplay');
+      cacheDom.scheduleContainer.classList.remove('display-flex');
       showOverflow();
-    },1000);
+    },800);
   }
 
+  cacheDom.getStarted.addEventListener('click', hideWelcomePage, false);
+  cacheDom.goHome.addEventListener('click', showWelcomePage, false);
   cacheDom.showMenuNav.addEventListener('click', showMenu, false);
   cacheDom.hideMenuNav.addEventListener('click', hideMenu, false);
 
@@ -604,13 +630,12 @@ const geckos6AppModule = (function() {
   }, false);
 
 
-  // Remove text fade-out effect when scrolled to bottom:
+  // Remove text fade-out effect when ed to bottom:
   cacheDom.scroll[2].addEventListener('scroll', function(event) {
     var element = event.target;
     if ( element.scrollHeight - element.scrollTop === element.clientHeight )
     {
       cacheDom.effect1.classList.remove('fade-out-text');
-      // console.log('scrolled');
     }
     else { cacheDom.effect1.classList.add('fade-out-text');
     }
@@ -631,18 +656,39 @@ const geckos6AppModule = (function() {
 
   cacheDom.objectTextFields.addEventListener('mouseout', showOverflow, false);
 
-  // cacheDom.employeeObject.addEventListener('mouseover', hideOverflow, false);
-  //
-  // cacheDom.timeTableObject.addEventListener('mouseover', hideOverflow, false);
-  //
-  // cacheDom.assignedShiftsObject.addEventListener('mouseover', hideOverflow, false);
-  //
-  // cacheDom.employeeObject.addEventListener('mouseout', showOverflow, false);
-  //
-  // cacheDom.timeTableObject.addEventListener('mouseout', showOverflow, false);
-  //
-  // cacheDom.assignedShiftsObject.addEventListener('mouseout', showOverflow, false);
+  // Adjust top of other pages when scrolling
+  function adjustTopWelcomePage() {
+    let top = document.documentElement.scrollTop;
+    console.log(top);
+    cacheDom.welcomePage.style.top = `${top}px`;
+  }
 
+  function adjustTopOnOffWP(x) {
+    if ( x === 'on' ) {
+      document.addEventListener('scroll', adjustTopWelcomePage, false);
+    }
+    else {
+      document.removeEventListener('scroll', adjustTopWelcomePage, false);
+    }
+  }
+
+  function adjustTopSettingsPage() {
+    let top = document.documentElement.scrollTop;
+    console.log(top);
+    cacheDom.aside.style.top = `${top}px`;
+  }
+
+  function adjustTopOnOffSP(x) {
+    if ( x === 'on' ) {
+      document.addEventListener('scroll', adjustTopSettingsPage, false);
+    }
+    else {
+      document.removeEventListener('scroll', adjustTopSettingsPage, false);
+    }
+  }
+
+
+return {}
 
 })();
 
