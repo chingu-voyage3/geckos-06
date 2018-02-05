@@ -39,7 +39,7 @@ const geckos6AppModule = (function() {
     emplName: document.getElementById('employee-name'),
     availDays: document.getElementById('avail-days'),
     maxHours: document.getElementById('max-hours'),
-    addEmployee: document.getElementById('add-employee'),
+    addEmployeeButton: document.getElementById('add-employee'),
     businessDay: document.getElementById('business-day'),
     open: document.getElementById('open'),
     close: document.getElementById('close'),
@@ -49,9 +49,9 @@ const geckos6AppModule = (function() {
     demo: document.getElementById('demo'),
     createSchedule: document.getElementById('create'),
     saveAll: document.getElementById('save-all'),
-    clearAll: document.getElementById('clear-all'),
+    clearAllButton: document.getElementById('clear-all'),
     numShifts: document.getElementById('num-shifts'),
-    addBusinessDay: document.getElementById('add-business-day'),
+    addBusinessDayButton: document.getElementById('add-business-day'),
     scheduleContainer: document.getElementById('schedule-container')
   };
 
@@ -374,7 +374,7 @@ const geckos6AppModule = (function() {
     eraseShiftBars();
     hideEmptyShiftBars();
     cacheDom.demo.removeAttribute('disabled');
-    cacheDom.clearAll.setAttribute('disabled', true);
+    cacheDom.clearAllButton.setAttribute('disabled', true);
     cacheDom.paragraph1.innerHTML = "";
     cacheDom.paragraph2.innerHTML = "";
     };
@@ -572,15 +572,20 @@ const geckos6AppModule = (function() {
   cacheDom.showMenuNav.addEventListener('click', showMenu, false);
   cacheDom.hideMenuNav.addEventListener('click', hideMenu, false);
 
-  cacheDom.addEmployee.addEventListener('click', function() {
+  cacheDom.getStarted.addEventListener('touchstart', hideWelcomePage, false);
+  cacheDom.goHome.addEventListener('touchstart', showWelcomePage, false);
+  cacheDom.showMenuNav.addEventListener('touchstart', showMenu, false);
+  cacheDom.hideMenuNav.addEventListener('touchstart', hideMenu, false);
+
+  function addEmployee() {
     let name = cacheDom.emplName.value;
     let avail = getAvailDays();
     let maxHours = cacheDom.maxHours.value;
     createEmployees(name, maxHours, avail);
     displayEmplObj();
-  }, false);
+  }
 
-  cacheDom.addBusinessDay.addEventListener('click', function() {
+  function addBusinessDay() {
     let day = cacheDom.businessDay.value;
     // console.log('cacheDom.businessDay: ', cacheDom.businessDay.value);
     // console.log('day: ', day);
@@ -591,7 +596,13 @@ const geckos6AppModule = (function() {
     let staffRequired = cacheDom.numShifts.value;
     createTimetable(day, open, close, staffRequired);
     displayTimetableObj();
-  }, false);
+  }
+
+  cacheDom.addEmployeeButton.addEventListener('click', addEmployee, false);
+  cacheDom.addBusinessDayButton.addEventListener('click', addBusinessDay, false);
+
+  cacheDom.addEmployeeButton.addEventListener('touchstart', addEmployee, false);
+  cacheDom.addBusinessDayButton.addEventListener('touchstart', addBusinessDay, false);
 
   function createDemo() {
     hideEmptyShiftBars('yes');
@@ -603,7 +614,7 @@ const geckos6AppModule = (function() {
     createShiftBars();
     hideEmptyShiftBars();
     cacheDom.demo.setAttribute('disabled', true);
-    cacheDom.clearAll.removeAttribute('disabled');
+    cacheDom.clearAllButton.removeAttribute('disabled');
   }
 
   function createSchedule() {
@@ -615,19 +626,24 @@ const geckos6AppModule = (function() {
     createShiftBars();
     hideEmptyShiftBars();
     cacheDom.createSchedule.setAttribute('disabled', true);
-    cacheDom.clearAll.removeAttribute('disabled');
+    cacheDom.clearAllButton.removeAttribute('disabled');
   }
 
   cacheDom.demo.addEventListener('click', createDemo, false);
+  cacheDom.demo.addEventListener('touchstart', createDemo, false);
 
   cacheDom.createSchedule.addEventListener('click', createSchedule, false);
+  cacheDom.createSchedule.addEventListener('touchstart', createSchedule, false);
 
-  cacheDom.clearAll.addEventListener('click', function() {
+  function clearAllIfConfirmed() {
     var clearOnlyIfConfirmed = window.confirm('Ok to clear All? Beware, this will clear all your entries. It also clears the demo data');
     if ( clearOnlyIfConfirmed ) {
       clearAll();
     }
-  }, false);
+  }
+
+  cacheDom.clearAllButton.addEventListener('click', clearAllIfConfirmed, false);
+  cacheDom.clearAllButton.addEventListener('touchstart', clearAllIfConfirmed, false);
 
 
   // Remove text fade-out effect when ed to bottom:
