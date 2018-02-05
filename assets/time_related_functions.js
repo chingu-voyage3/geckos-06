@@ -47,12 +47,13 @@ todayDate: function() {
   var weekdayNum = x.getDay();
   var commentTemplate = '<br /><span style="font-size: 0.9em">';
   var comment =
-  weekdayNum === 0 ? commentTemplate + 'Sundays give me the dreads</span>' :
-  weekdayNum === 1 ? commentTemplate + 'It\'s a good day to make a schedule</span>' :
-  weekdayNum === 2 ? commentTemplate + 'It\'s a good day to make a schedule</span>' :
-  weekdayNum === 3 ? commentTemplate + 'Happy HUMP day!</span>' :
+  weekdayNum === 0 ? commentTemplate + 'It\'s Sunday, enjoy it, don\'t think about tomorrow</span>' :
+  weekdayNum === 1 ? commentTemplate + 'It\'s a good day to make a schedule!</span>' :
+  weekdayNum === 2 ? commentTemplate + 'It\'s a good day to make a schedule!</span>' :
+  weekdayNum === 3 ? commentTemplate + 'Happy HUMP day! It\'s a good day to make a schedule!</span>' :
   weekdayNum === 4 ? commentTemplate + 'It\'s a good day to make a schedule!</span>' :
-  commentTemplate + 'Saturdays RULE the world!</span>';
+  weekdayNum === 5 ? commentTemplate + 'TGIF! It\'s a good day to make a schedule!</span>' :
+  commentTemplate + 'Saturdays RULE the world! Why not make a schedule?</span>';
   return today + comment;
 },
 
