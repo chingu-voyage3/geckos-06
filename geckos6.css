@@ -1,5 +1,5 @@
 body {
-  overflow-x: hidden;
+  overflow: hidden;
   font-family: 'Open Sans', Roboto, sans-serif;
   /* height: 200vh; (added with js)*/
   /* width: calc(100vw - 20px); */
@@ -71,7 +71,7 @@ nav {
   flex-direction: column;
   align-items: center;
   position: absolute;
-  overflow-y: hidden;
+  overflow: hidden;
   /* height: 100vh; */
   width: 100vw;
   top: 0;
@@ -604,6 +604,10 @@ h3 {
 
 .display-flex {
   display: flex;
+}
+
+.display-block {
+  display: block;
 }
 
 

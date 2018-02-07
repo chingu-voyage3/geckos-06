@@ -49,7 +49,7 @@ const geckos6AppModule = (function() {
     demo: document.getElementById('demo'),
     createSchedule: document.getElementById('create'),
     saveAll: document.getElementById('save-all'),
-    clearAllButton: document.getElementById('clear-all'),
+    clearAll: document.getElementById('clear-all'),
     numShifts: document.getElementById('num-shifts'),
     addBusinessDayButton: document.getElementById('add-business-day'),
     scheduleContainer: document.getElementById('schedule-container')
@@ -374,7 +374,7 @@ const geckos6AppModule = (function() {
     eraseShiftBars();
     hideEmptyShiftBars();
     cacheDom.demo.removeAttribute('disabled');
-    cacheDom.clearAllButton.setAttribute('disabled', true);
+    cacheDom.clearAll.setAttribute('disabled', true);
     cacheDom.paragraph1.innerHTML = "";
     cacheDom.paragraph2.innerHTML = "";
     };
@@ -529,14 +529,16 @@ const geckos6AppModule = (function() {
     cacheDom.welcomePage.classList.replace('left-position-100', 'left-position-zero');
     // cacheDom.aside.classList.remove('display-flex');
     adjustTopOnOffSP('off');
+    adjustTopOnOffWP('off');
     // setTimeout(function() {
     //   showOverflow();
     // },800); // match transition-duration
   }
 
-  const hideWelcomePage = function() {
+  const hideWelcomePage = function(event) {
     cacheDom.welcomePage.classList.replace('left-position-zero', 'left-position-100');
-    cacheDom.aside.classList.add('display-flex');
+    console.log('event:', event);
+    cacheDom.aside.classList.add('display-block');
     adjustTopOnOffWP('on');
     setTimeout(function() {
       showOverflow();
@@ -564,17 +566,21 @@ const geckos6AppModule = (function() {
     setTimeout(function() {
       cacheDom.scheduleContainer.classList.remove('display-flex');
       showOverflow();
+      cacheDom.aside.style.top = 0;
+      document.documentElement.scrollTop = 0;
     },800);
   }
 
   cacheDom.getStarted.addEventListener('click', hideWelcomePage, false);
-  cacheDom.goHome.addEventListener('click', showWelcomePage, false);
-  cacheDom.showMenuNav.addEventListener('click', showMenu, false);
-  cacheDom.hideMenuNav.addEventListener('click', hideMenu, false);
-
   cacheDom.getStarted.addEventListener('touchstart', hideWelcomePage, false);
+
+  cacheDom.goHome.addEventListener('click', showWelcomePage, false);
   cacheDom.goHome.addEventListener('touchstart', showWelcomePage, false);
+
+  cacheDom.showMenuNav.addEventListener('click', showMenu, false);
   cacheDom.showMenuNav.addEventListener('touchstart', showMenu, false);
+
+  cacheDom.hideMenuNav.addEventListener('click', hideMenu, false);
   cacheDom.hideMenuNav.addEventListener('touchstart', hideMenu, false);
 
   function addEmployee() {
@@ -584,6 +590,9 @@ const geckos6AppModule = (function() {
     createEmployees(name, maxHours, avail);
     displayEmplObj();
   }
+
+  cacheDom.addEmployeeButton.addEventListener('click', addEmployee, false);
+  cacheDom.addEmployeeButton.addEventListener('touchstart', addEmployee, false);
 
   function addBusinessDay() {
     let day = cacheDom.businessDay.value;
@@ -598,10 +607,7 @@ const geckos6AppModule = (function() {
     displayTimetableObj();
   }
 
-  cacheDom.addEmployeeButton.addEventListener('click', addEmployee, false);
   cacheDom.addBusinessDayButton.addEventListener('click', addBusinessDay, false);
-
-  cacheDom.addEmployeeButton.addEventListener('touchstart', addEmployee, false);
   cacheDom.addBusinessDayButton.addEventListener('touchstart', addBusinessDay, false);
 
   function createDemo() {
@@ -614,7 +620,7 @@ const geckos6AppModule = (function() {
     createShiftBars();
     hideEmptyShiftBars();
     cacheDom.demo.setAttribute('disabled', true);
-    cacheDom.clearAllButton.removeAttribute('disabled');
+    cacheDom.clearAll.removeAttribute('disabled');
   }
 
   function createSchedule() {
@@ -626,7 +632,7 @@ const geckos6AppModule = (function() {
     createShiftBars();
     hideEmptyShiftBars();
     cacheDom.createSchedule.setAttribute('disabled', true);
-    cacheDom.clearAllButton.removeAttribute('disabled');
+    cacheDom.clearAll.removeAttribute('disabled');
   }
 
   cacheDom.demo.addEventListener('click', createDemo, false);
@@ -635,19 +641,19 @@ const geckos6AppModule = (function() {
   cacheDom.createSchedule.addEventListener('click', createSchedule, false);
   cacheDom.createSchedule.addEventListener('touchstart', createSchedule, false);
 
-  function clearAllIfConfirmed() {
-    var clearOnlyIfConfirmed = window.confirm('Ok to clear All? Beware, this will clear all your entries. It also clears the demo data');
-    if ( clearOnlyIfConfirmed ) {
+  function clearOnlyIfConfirmed() {
+    let confirm = window.confirm('Ok to clear All? Beware, this will clear all your entries. It also clears the demo data');
+    if ( confirm ) {
       clearAll();
     }
   }
 
-  cacheDom.clearAllButton.addEventListener('click', clearAllIfConfirmed, false);
-  cacheDom.clearAllButton.addEventListener('touchstart', clearAllIfConfirmed, false);
+  cacheDom.clearAll.addEventListener('click', clearOnlyIfConfirmed, false);
+  cacheDom.clearAll.addEventListener('touchstart', clearOnlyIfConfirmed, false);
 
 
   // Remove text fade-out effect when ed to bottom:
-  cacheDom.scroll[2].addEventListener('scroll', function(event) {
+  function removeFadeOut(event) {
     var element = event.target;
     if ( element.scrollHeight - element.scrollTop === element.clientHeight )
     {
@@ -655,8 +661,9 @@ const geckos6AppModule = (function() {
     }
     else { cacheDom.effect1.classList.add('fade-out-text');
     }
-  }, false);
+  }
 
+  cacheDom.scroll[2].addEventListener('scroll', removeFadeOut, false);
 
   // Prevent scrolling of menu page when cursor inside scrollable objects:
   function hideOverflow() {
@@ -669,14 +676,25 @@ const geckos6AppModule = (function() {
   }
 
   cacheDom.objectTextFields.addEventListener('mouseover', hideOverflow, false);
-
   cacheDom.objectTextFields.addEventListener('mouseout', showOverflow, false);
 
   // Adjust top of other pages when scrolling
   function adjustTopWelcomePage() {
     let top = document.documentElement.scrollTop;
-    console.log(top);
-    cacheDom.welcomePage.style.top = `${top}px`;
+    let vh = document.documentElement.clientHeight;
+    // console.log(top);
+    if ( top < vh ) { // vh
+      cacheDom.welcomePage.style.top = `${top}px`;
+    }
+  }
+
+  function adjustTopSettingsPage() {
+    let top = document.documentElement.scrollTop;
+    let vh = document.documentElement.clientHeight;
+    // console.log(top);
+    if ( top < vh ) { // vh
+      cacheDom.aside.style.top = `${top}px`;
+    }
   }
 
   function adjustTopOnOffWP(x) {
@@ -688,12 +706,6 @@ const geckos6AppModule = (function() {
     }
   }
 
-  function adjustTopSettingsPage() {
-    let top = document.documentElement.scrollTop;
-    console.log(top);
-    cacheDom.aside.style.top = `${top}px`;
-  }
-
   function adjustTopOnOffSP(x) {
     if ( x === 'on' ) {
       document.addEventListener('scroll', adjustTopSettingsPage, false);
@@ -703,8 +715,25 @@ const geckos6AppModule = (function() {
     }
   }
 
+  function limitScroll(element) {
+    let limit = document.documentElement.clientHeight * 2;
+    if ( element.scrollHeight > limit) {
+      hideOverflow();
+    }
+  }
 
-return {}
+
+return {
+  clientHeight: function() {
+    return document.documentElement.clientHeight;
+  },
+  scrollTop: function() {
+    return document.documentElement.scrollTop;
+  },
+  scrollHeight: function() {
+    return document.documentElement.scrollHeight;
+  }
+}
 
 })();
 
