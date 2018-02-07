@@ -123,7 +123,7 @@ const geckos6AppModule = (function() {
   // second pair of digits: iteration position of names
   // third pair of digits: max # of shifts employee can work
   // single digit after 3 pairs: # of weekdays available
-  const employeeArr1Maker = function() {
+  function employeeArr1Maker() {
     let empl = Object.keys(employees);
     let shiftLength = 4; // hours
     empl.forEach(function(name, index) {
@@ -146,7 +146,7 @@ const geckos6AppModule = (function() {
   // 1st sort: second pair of digits: iteration position of names (index 3,4)
   // 2nd sort: single digit after 3 pairs: # of weekdays available (index 9)
   // 3rd sort: third pair of digits: max # of shifts employee can work (index 6,7)
-  const employeeArr2Maker = function() {
+  function employeeArr2Maker() {
     employeeArr2 = [...employeeArr1];
     employeeArr2.sort(function(a, b) {
       let alpha, bravo;
@@ -171,7 +171,7 @@ const geckos6AppModule = (function() {
   };
 
   // cleanup array of employee names (removes sorting data):
-  const employeeArr3Maker = function() {
+  function employeeArr3Maker() {
     employeeArr3 = employeeArr2.map(function(x) {
       y = x.slice(11, x.length);
       return y;
@@ -180,7 +180,7 @@ const geckos6AppModule = (function() {
   };
 
   // create initial array of shift slots (creates sub-arrays):
-  const shiftsArr1Maker = function(nameNum) {
+  function shiftsArr1Maker(nameNum) {
     let weekdays = Object.keys(timetable);
     // console.log(weekdays);
     weekdays.forEach(function(weekday, index) {
@@ -231,7 +231,7 @@ const geckos6AppModule = (function() {
   };
 
   // cleanup array of shift slots (remove sub-arrays):
-  const shiftsArr2Maker = function() {
+  function shiftsArr2Maker() {
     let lgt1 = shiftsArr1.length;
     for ( let i = 0; i < lgt1; i++ ) {
       let lgt2 = shiftsArr1[i].length;
@@ -259,7 +259,7 @@ const geckos6AppModule = (function() {
   // };
 
   // Final Shift Assigner function:
-  const assignedShiftsObj2Maker = function(edit) {
+  function assignedShiftsObj2Maker(edit) {
     let lgt;
     console.log('employeeArr3: ', employeeArr3);
     if ( employeeArr3.length > shiftsArr2.length ) {
@@ -313,12 +313,12 @@ const geckos6AppModule = (function() {
   *****************************************/
 
   // functions for pulling data from settings menu:
-  const createEmployees = function(name, maxHours, avail) {
+  function createEmployees(name, maxHours, avail) {
       let employeeName = name;
       employees[employeeName] = { maxHours, avail };
   };
 
-  const createTimetable = function(day, open, close, staffRequired) {
+  function createTimetable(day, open, close, staffRequired) {
     timetable[day] = {};
     timetable[day].open = Number(open);
     timetable[day].close = Number(close);
@@ -348,7 +348,7 @@ const geckos6AppModule = (function() {
    Run all scheduling functions:
   *****************************************/
 
-  const createAll = function() {
+  function createAll() {
     employeeArr1Maker();
     employeeArr2Maker();
     employeeArr3Maker();
@@ -358,7 +358,7 @@ const geckos6AppModule = (function() {
     assignedShiftsObj2Maker('edit'); // cleanup result
   };
 
-  const clearAll = function() {
+  function clearAll() {
     employees = {};
     timetable = {};
     employeeArr1 = [];
@@ -384,7 +384,7 @@ const geckos6AppModule = (function() {
    Display employee object to menu page:
   *****************************************/
 
-  const displayEmplObj = function() {
+  function displayEmplObj() {
     let text = '';
     Object.keys(employees).forEach(function(name) {
       let maxHours = employees[name].maxHours;
@@ -399,7 +399,7 @@ const geckos6AppModule = (function() {
    Display timetable object to menu page:
   *****************************************/
 
-  const displayTimetableObj = function() {
+  function displayTimetableObj() {
     let text = '';
     Object.keys(timetable).forEach(function(day) {
       let open = timetable[day].open;
@@ -415,7 +415,7 @@ const geckos6AppModule = (function() {
    Display assigned shifts object to menu page:
   *****************************************/
 
-  const displayAssignedShiftsObj = function() {
+  function displayAssignedShiftsObj() {
     let text = '';
     for ( var shift in assignedShiftsObj2 ) {
       let name = assignedShiftsObj2[shift];
@@ -524,7 +524,10 @@ const geckos6AppModule = (function() {
    Navigation functions & event listeners:
   *****************************************/
 
-  const showWelcomePage = function() {
+  function showWelcomePage(event) {
+    if ( event.type === 'touchstart' ) {
+      event.preventDefault();
+    }
     hideOverflow();
     // classList.replace not available on mobile: cacheDom.welcomePage.classList.replace('left-position-100', 'left-position-zero');
     cacheDom.welcomePage.classList.remove('left-position-100');
@@ -537,7 +540,10 @@ const geckos6AppModule = (function() {
     // },800); // match transition-duration
   }
 
-  const hideWelcomePage = function(event) {
+  function hideWelcomePage(event) {
+    if ( event.type === 'touchstart' ) {
+      event.preventDefault();
+    }
     // classList.replace not available on mobile: cacheDom.welcomePage.classList.replace('left-position-zero', 'left-position-100');
     cacheDom.welcomePage.classList.remove('left-position-zero');
     cacheDom.welcomePage.classList.add('left-position-100');
@@ -548,7 +554,10 @@ const geckos6AppModule = (function() {
     },800); // match transition-duration
   }
 
-  const hideMenu = function() {
+  function hideMenu(event) {
+    if ( event.type === 'touchstart' ) {
+      event.preventDefault();
+    }
     cacheDom.hideMenuNav.setAttribute('disabled', true);
     cacheDom.showMenuNav.removeAttribute('disabled');
     hideOverflow();
@@ -560,7 +569,10 @@ const geckos6AppModule = (function() {
     },800); // match transition-duration
   }
 
-  const showMenu = function() {
+  function showMenu(event) {
+    if ( event.type === 'touchstart' ) {
+      event.preventDefault();
+    }
     cacheDom.showMenuNav.setAttribute('disabled', true);
     cacheDom.hideMenuNav.removeAttribute('disabled');
     hideOverflow();
@@ -574,19 +586,23 @@ const geckos6AppModule = (function() {
     },800);
   }
 
-  cacheDom.getStarted.addEventListener('click', hideWelcomePage, false);
   cacheDom.getStarted.addEventListener('touchstart', hideWelcomePage, false);
+  cacheDom.getStarted.addEventListener('click', hideWelcomePage, false);
 
-  cacheDom.goHome.addEventListener('click', showWelcomePage, false);
+
   cacheDom.goHome.addEventListener('touchstart', showWelcomePage, false);
+  cacheDom.goHome.addEventListener('click', showWelcomePage, false);
 
-  cacheDom.showMenuNav.addEventListener('click', showMenu, false);
   cacheDom.showMenuNav.addEventListener('touchstart', showMenu, false);
+  cacheDom.showMenuNav.addEventListener('click', showMenu, false);
 
-  cacheDom.hideMenuNav.addEventListener('click', hideMenu, false);
   cacheDom.hideMenuNav.addEventListener('touchstart', hideMenu, false);
+  cacheDom.hideMenuNav.addEventListener('click', hideMenu, false);
 
-  function addEmployee() {
+  function addEmployee(event) {
+    if ( event.type === 'touchstart' ) {
+      event.preventDefault();
+    }
     let name = cacheDom.emplName.value;
     let avail = getAvailDays();
     let maxHours = cacheDom.maxHours.value;
@@ -594,10 +610,13 @@ const geckos6AppModule = (function() {
     displayEmplObj();
   }
 
-  cacheDom.addEmployeeButton.addEventListener('click', addEmployee, false);
   cacheDom.addEmployeeButton.addEventListener('touchstart', addEmployee, false);
+  cacheDom.addEmployeeButton.addEventListener('click', addEmployee, false);
 
-  function addBusinessDay() {
+  function addBusinessDay(event) {
+    if ( event.type === 'touchstart' ) {
+      event.preventDefault();
+    }
     let day = cacheDom.businessDay.value;
     // console.log('cacheDom.businessDay: ', cacheDom.businessDay.value);
     // console.log('day: ', day);
@@ -610,10 +629,13 @@ const geckos6AppModule = (function() {
     displayTimetableObj();
   }
 
-  cacheDom.addBusinessDayButton.addEventListener('click', addBusinessDay, false);
   cacheDom.addBusinessDayButton.addEventListener('touchstart', addBusinessDay, false);
+  cacheDom.addBusinessDayButton.addEventListener('click', addBusinessDay, false);
 
-  function createDemo() {
+  function createDemo(event) {
+    if ( event.type === 'touchstart' ) {
+      event.preventDefault();
+    }
     hideEmptyShiftBars('yes');
     createDemoObj();
     createAll();
@@ -626,7 +648,10 @@ const geckos6AppModule = (function() {
     cacheDom.clearAll.removeAttribute('disabled');
   }
 
-  function createSchedule() {
+  function createSchedule(event) {
+    if ( event.type === 'touchstart' ) {
+      event.preventDefault();
+    }
     hideEmptyShiftBars('yes');
     createAll();
     displayEmplObj();
@@ -638,21 +663,24 @@ const geckos6AppModule = (function() {
     cacheDom.clearAll.removeAttribute('disabled');
   }
 
-  cacheDom.demo.addEventListener('click', createDemo, false);
   cacheDom.demo.addEventListener('touchstart', createDemo, false);
+  cacheDom.demo.addEventListener('click', createDemo, false);
 
-  cacheDom.createSchedule.addEventListener('click', createSchedule, false);
   cacheDom.createSchedule.addEventListener('touchstart', createSchedule, false);
+  cacheDom.createSchedule.addEventListener('click', createSchedule, false);
 
-  function clearOnlyIfConfirmed() {
+  function clearOnlyIfConfirmed(event) {
+    if ( event.type === 'touchstart' ) {
+      event.preventDefault();
+    }
     let confirm = window.confirm('Ok to clear All? Beware, this will clear all your entries. It also clears the demo data');
     if ( confirm ) {
       clearAll();
     }
   }
 
-  cacheDom.clearAll.addEventListener('click', clearOnlyIfConfirmed, false);
   cacheDom.clearAll.addEventListener('touchstart', clearOnlyIfConfirmed, false);
+  cacheDom.clearAll.addEventListener('click', clearOnlyIfConfirmed, false);
 
 
   // Remove text fade-out effect when ed to bottom:
