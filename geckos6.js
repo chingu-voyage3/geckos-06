@@ -571,7 +571,7 @@ const geckos6AppModule = (function() {
     },800);
   }
 
-  cacheDom.getStarted.addEventListener('click', hideWelcomePage, false);
+  //cacheDom.getStarted.addEventListener('click', hideWelcomePage, false);
   cacheDom.getStarted.addEventListener('touchstart', hideWelcomePage, false);
 
   cacheDom.goHome.addEventListener('click', showWelcomePage, false);
