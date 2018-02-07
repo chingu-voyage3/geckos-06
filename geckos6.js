@@ -526,7 +526,9 @@ const geckos6AppModule = (function() {
 
   const showWelcomePage = function() {
     hideOverflow();
-    cacheDom.welcomePage.classList.replace('left-position-100', 'left-position-zero');
+    // classList.replace not available on mobile: cacheDom.welcomePage.classList.replace('left-position-100', 'left-position-zero');
+    cacheDom.welcomePage.classList.remove('left-position-100');
+    cacheDom.welcomePage.classList.add('left-position-zero');
     // cacheDom.aside.classList.remove('display-flex');
     adjustTopOnOffSP('off');
     adjustTopOnOffWP('off');
@@ -536,8 +538,9 @@ const geckos6AppModule = (function() {
   }
 
   const hideWelcomePage = function(event) {
-    cacheDom.welcomePage.classList.replace('left-position-zero', 'left-position-100');
-    console.log('event:', event);
+    // classList.replace not available on mobile: cacheDom.welcomePage.classList.replace('left-position-zero', 'left-position-100');
+    cacheDom.welcomePage.classList.remove('left-position-zero');
+    cacheDom.welcomePage.classList.add('left-position-100');
     cacheDom.aside.classList.add('display-block');
     adjustTopOnOffWP('on');
     setTimeout(function() {
@@ -571,7 +574,7 @@ const geckos6AppModule = (function() {
     },800);
   }
 
-  //cacheDom.getStarted.addEventListener('click', hideWelcomePage, false);
+  cacheDom.getStarted.addEventListener('click', hideWelcomePage, false);
   cacheDom.getStarted.addEventListener('touchstart', hideWelcomePage, false);
 
   cacheDom.goHome.addEventListener('click', showWelcomePage, false);
