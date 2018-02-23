@@ -1,10 +1,17 @@
+:root {
+  --background-color: #555560;
+  --timetable-color: #222F3D;
+  --shift-bar-odd-color: #42B34F;
+  --shift-bar-even-color: #5BA2AD;
+}
+
 body {
   overflow: hidden;
   font-family: 'Open Sans', Roboto, sans-serif;
   /* height: 200vh; (added with js)*/
   /* width: calc(100vw - 20px); */
   width: 100vw;
-  background-color: #555560;
+  background-color: var(--background-color, #555560) /* #555560 */;
   color: #ccc;
   margin: 0;
   padding: 0;
@@ -42,7 +49,7 @@ nav {
   height: 60px;
   margin: 0 0 auto 0;
   background-color: #121F2D;
-  color: #5ba2ad; /* #42B34F; #80ff80; */
+  color: var(--shift-bar-even-color, #5BA2AD); /* #5BA2AD */; /* #42B34F; #80ff80; */
   box-shadow: 0 4px 8px 2px rgba(0, 0, 0, 0.19), 0 6px 20px 2px rgba(0, 0, 0, 0.20);
   border-bottom: 1px solid black;
   z-index: 5;
@@ -82,10 +89,14 @@ nav {
   padding-bottom: 10px;
   min-height: 100vh;
   width: 100vw;
-  -webkit-transition: left 0.8s ease;
-  -moz-transition: left 0.8s ease;
-  -o-transition: left 0.8s ease;
-  transition: left 0.8s ease;
+  /* -webkit-transition: left 0.5s ease;
+  -moz-transition: left 0.5s ease;
+  -o-transition: left 0.5s ease;
+  transition: left 0.5s ease; */
+  -webkit-transition: transform 0.5s ease;
+  -moz-transition: transform 0.5s ease;
+  -o-transition: transform 0.5s ease;
+  transition: transform 0.5s ease;
   z-index: 6;
 }
 
@@ -105,7 +116,7 @@ nav {
 
 a {
   text-decoration: none;
-  color: #222f3d;
+  color: var(--timetable-color, #222F3D); /* #222F3D */
 }
 
 ul {
@@ -115,7 +126,7 @@ ul {
 }
 
 #get-started {
-  color: #222f3d;
+  color: var(--timetable-color, #222F3D); /* #222F3D */
   font-size: 1.5em;
 }
 
@@ -144,7 +155,7 @@ ul {
   left: -10px;
   display: flex;
   flex-direction: row;
-  background-color: #222F3D;
+  background-color: var(--timetable-color, #222F3D); /* #222F3D */
   margin: 85px 0 0 0;
   padding: 0;
   padding-bottom: 5px;
@@ -283,31 +294,31 @@ ul {
 }
 
 .shift1 {
-  background-color: #42B34F;
+  background-color: var(--shift-bar-odd-color, #42B34F); /* #42B34F */;
 }
 
 .shift2 {
-  background-color: #5BA2AD;
+  background-color: var(--shift-bar-even-color, #5BA2AD); /* #5BA2AD */;
 }
 
 .shift3 {
-  background-color: #42B34F;
+  background-color: var(--shift-bar-odd-color, #42B34F); /* #42B34F */;
 }
 
 .shift4 {
-  background-color: #5BA2AD;
+  background-color: var(--shift-bar-even-color, #5BA2AD); /* #5BA2AD */;
 }
 
 .shift5 {
-  background-color: #42B34F;
+  background-color: var(--shift-bar-odd-color, #42B34F); /* #42B34F */;
 }
 
 .shift6 {
-  background-color: #5BA2AD;
+  background-color: var(--shift-bar-even-color, #5BA2AD); /* #5BA2AD */;
 }
 
 .shift7 {
-  background-color: #42B34F;
+  background-color: var(--shift-bar-odd-color, #42B34F); /* #42B34F */;
 }
 
 [class*="shift"] {
@@ -319,7 +330,7 @@ ul {
   float-: none;
   font-size: 2vh;
   font-weight: bold;
-  color: #222F3D;
+  color: var(--timetable-color, #222F3D); /* #222F3D */
   /* border: 1px solid black; */
   padding: 0 5px 5px 5px;
   box-sizing: border-box;         /* Opera/IE 8+ */
@@ -388,15 +399,19 @@ aside {
   overflow: hidden;
   top: 0;
   left: 0;
-  background-color: #222F3D;
+  background-color: var(--timetable-color, #222F3D); /* #222F3D */
   margin: 0;
   padding-bottom: 10px;
   min-height: 100vh;
   width: 100vw;
-  -webkit-transition: left 0.8s ease;
-  -moz-transition: left 0.8s ease;
-  -o-transition: left 0.8s ease;
-  transition: left 0.8s ease;
+  /* -webkit-transition: left 0.5s ease;
+  -moz-transition: left 0.5s ease;
+  -o-transition: left 0.5s ease;
+  transition: left 0.5s ease; */
+  -webkit-transition: transform 0.5s ease;
+  -moz-transition: transform 0.5s ease;
+  -o-transition: transform 0.5s ease;
+  transition: transform 0.5s ease;
   z-index: 4;
 }
 
@@ -491,7 +506,7 @@ fieldset:first-of-type {
   width: 100px;
   height: 40px;
   margin: 10px 10px;
-  background-color: #5BA2AD;
+  background-color: var(--shift-bar-even-color, #5BA2AD); /* #5BA2AD */;
   border: solid 2px black;
   border-radius: 0.25em;
   -webkit-appearance: none;
@@ -584,16 +599,18 @@ h3 {
  CLASSES ADDED/REMOVED WITH JS
 **************************************/
 
-.left-position-zero {
+/* Apparently using translate to move elements is more performant than changing positioning, so we'll use translateX instead of changing the left position */
+.left-position-zero { /* used for welcome-page default */
   left: 0;
 }
 
-.left-position-100 {
+.left-position-100 { /* no longer used */
   left: -100vw;
 }
 
-.hide-swipe {
-  left: -100vw;
+/* Also, it looks like simply removing the class will reset the position. no need to have */
+.left-translateX-100vw {
+  transform: translateX(-100vw);
 }
 
 /* use these reusable classes instead

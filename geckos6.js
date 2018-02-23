@@ -35,6 +35,7 @@ const geckos6AppModule = (function() {
     objectTextFields: document.getElementById('object-text-fields'),
     scroll: document.getElementsByClassName('scroll-texts'),
     effect1: document.getElementById('effect1'),
+    effect2: document.getElementById('effect2'),
     shiftAll: document.querySelectorAll('[class*="shift"]'),
     emplName: document.getElementById('employee-name'),
     availDays: document.getElementById('avail-days'),
@@ -176,7 +177,7 @@ const geckos6AppModule = (function() {
       y = x.slice(11, x.length);
       return y;
     });
-    console.log('employeeArr3: ' + employeeArr3);
+    // console.log('employeeArr3: ' + employeeArr3);
   };
 
   // create initial array of shift slots (creates sub-arrays):
@@ -261,7 +262,7 @@ const geckos6AppModule = (function() {
   // Final Shift Assigner function:
   function assignedShiftsObj2Maker(edit) {
     let lgt;
-    console.log('employeeArr3: ', employeeArr3);
+    // console.log('employeeArr3: ', employeeArr3);
     if ( employeeArr3.length > shiftsArr2.length ) {
       lgt = shiftsArr2.length;
     }
@@ -301,8 +302,8 @@ const geckos6AppModule = (function() {
       // let remove2 = employeeArr3.indexOf(empl);
       if ( remove1 < (employeeArr3.length - 1) ) {
         employeeArr3.splice(remove1, 1);
-        console.log('remove1: ', remove1);
-        console.log('employeeArr3: ', employeeArr3);
+        // console.log('remove1: ', remove1);
+        // console.log('employeeArr3: ', employeeArr3);
       }
     }
   };
@@ -530,14 +531,15 @@ const geckos6AppModule = (function() {
     }
     hideOverflow();
     // classList.replace not available on mobile: cacheDom.welcomePage.classList.replace('left-position-100', 'left-position-zero');
-    cacheDom.welcomePage.classList.remove('left-position-100');
-    cacheDom.welcomePage.classList.add('left-position-zero');
+    // cacheDom.welcomePage.classList.remove('left-position-100');
+    cacheDom.welcomePage.classList.remove('left-translateX-100vw');
+    // cacheDom.welcomePage.classList.add('left-position-zero');
     // cacheDom.aside.classList.remove('display-flex');
     adjustTopOnOffSP('off');
     adjustTopOnOffWP('off');
     // setTimeout(function() {
     //   showOverflow();
-    // },800); // match transition-duration
+    // },500); // match transition-duration
   }
 
   function hideWelcomePage(event) {
@@ -545,13 +547,14 @@ const geckos6AppModule = (function() {
       event.preventDefault();
     }
     // classList.replace not available on mobile: cacheDom.welcomePage.classList.replace('left-position-zero', 'left-position-100');
-    cacheDom.welcomePage.classList.remove('left-position-zero');
-    cacheDom.welcomePage.classList.add('left-position-100');
+    // cacheDom.welcomePage.classList.remove('left-position-zero');
+    // cacheDom.welcomePage.classList.add('left-position-100');
+    cacheDom.welcomePage.classList.add('left-translateX-100vw');
     cacheDom.aside.classList.add('display-block');
     adjustTopOnOffWP('on');
     setTimeout(function() {
       showOverflow();
-    },800); // match transition-duration
+    },500); // match transition-duration
   }
 
   function hideMenu(event) {
@@ -561,12 +564,12 @@ const geckos6AppModule = (function() {
     cacheDom.hideMenuNav.setAttribute('disabled', true);
     cacheDom.showMenuNav.removeAttribute('disabled');
     hideOverflow();
-    cacheDom.aside.classList.toggle('hide-swipe');
+    cacheDom.aside.classList.toggle('left-translateX-100vw');
     cacheDom.scheduleContainer.classList.add('display-flex');
     adjustTopOnOffSP('on');
     setTimeout(function() {
       showOverflow();
-    },800); // match transition-duration
+    },500); // match transition-duration
   }
 
   function showMenu(event) {
@@ -576,14 +579,14 @@ const geckos6AppModule = (function() {
     cacheDom.showMenuNav.setAttribute('disabled', true);
     cacheDom.hideMenuNav.removeAttribute('disabled');
     hideOverflow();
-    cacheDom.aside.classList.toggle('hide-swipe');
+    cacheDom.aside.classList.toggle('left-translateX-100vw');
     adjustTopOnOffSP('off');
     setTimeout(function() {
       cacheDom.scheduleContainer.classList.remove('display-flex');
       showOverflow();
       cacheDom.aside.style.top = 0;
       document.documentElement.scrollTop = 0;
-    },800);
+    },500); // match transition-duration
   }
 
   cacheDom.getStarted.addEventListener('touchstart', hideWelcomePage, false);
@@ -683,9 +686,10 @@ const geckos6AppModule = (function() {
   cacheDom.clearAll.addEventListener('click', clearOnlyIfConfirmed, false);
 
 
-  // Remove text fade-out effect when ed to bottom:
+  // Remove text fade-out effect when scrolled to bottom:
   function removeFadeOut(event) {
     var element = event.target;
+    // console.log(element);
     if ( element.scrollHeight - element.scrollTop === element.clientHeight )
     {
       cacheDom.effect1.classList.remove('fade-out-text');
