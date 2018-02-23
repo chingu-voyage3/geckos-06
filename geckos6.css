@@ -1,43 +1,162 @@
+:root {
+  --background-color: #555560;
+  --timetable-color: #222F3D;
+  --shift-bar-odd-color: #42B34F;
+  --shift-bar-even-color: #5BA2AD;
+}
+
 body {
-  overflow-x: hidden;
+  overflow: hidden;
   font-family: 'Open Sans', Roboto, sans-serif;
-  height: 200vh;
-  width: calc(100vw - 20px);
-  background-color: #555560;
+  /* height: 200vh; (added with js)*/
+  /* width: calc(100vw - 20px); */
+  width: 100vw;
+  background-color: var(--background-color, #555560) /* #555560 */;
   color: #ccc;
   margin: 0;
   padding: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* align-items: center; */
 }
+
+
+/****************************************
+ HEADER (incl nav bar)
+****************************************/
 
 header {
   margin: 0;
 }
 
-h1, h2 {
+.h1-nav-bar, .h2-settings, h3 {
+  text-align: center;
+  margin: 0;
+}
+
+.h1-nav-bar {
+  margin-top: 10px;
+}
+
+.h2-settings {
+  font-size: 1.1em;
+}
+
+nav {
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  height: 60px;
+  margin: 0 0 auto 0;
+  background-color: #121F2D;
+  color: var(--shift-bar-even-color, #5BA2AD); /* #5BA2AD */; /* #42B34F; #80ff80; */
+  box-shadow: 0 4px 8px 2px rgba(0, 0, 0, 0.19), 0 6px 20px 2px rgba(0, 0, 0, 0.20);
+  border-bottom: 1px solid black;
+  z-index: 5;
+}
+
+#todayDateInstance {
+  font-size: 0.9em;
+}
+
+#sessionTimeComponent {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 230px;
+  margin: 0;
+  font-size: 0.8em;
+}
+
+
+/***************************************
+ HOME PAGE (WELCOME PAGE)
+***************************************/
+
+#welcome-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  overflow: hidden;
+  /* height: 100vh; */
+  width: 100vw;
+  top: 0;
+  /* left: 0;  (see class)*/
+  /* background-color: */
+  background: linear-gradient(45deg, #42b34f 0%, #5ba2ad 60%, #72746d 85%, #222f3d 100%);
+  margin: 0;
+  padding-bottom: 10px;
+  min-height: 100vh;
+  width: 100vw;
+  /* -webkit-transition: left 0.5s ease;
+  -moz-transition: left 0.5s ease;
+  -o-transition: left 0.5s ease;
+  transition: left 0.5s ease; */
+  -webkit-transition: transform 0.5s ease;
+  -moz-transition: transform 0.5s ease;
+  -o-transition: transform 0.5s ease;
+  transition: transform 0.5s ease;
+  z-index: 6;
+}
+
+.h1-welcome, .h2-welcome {
   text-align: center;
   margin-bottom: 10px;
 }
 
-h5 {
-  text-align: center;
-  margin: 0;
-  font-size: 2vh;
+.welcome-header {
+  width: 400px;
 }
 
-#container {
-  display: flex;
+.big {
+  font-size: 3em;
+  margin-top: 110px;
+}
+
+a {
+  text-decoration: none;
+  color: var(--timetable-color, #222F3D); /* #222F3D */
+}
+
+ul {
+  align-items: flex-start;
   flex-direction: row;
+  list-style-type: none;
+}
+
+#get-started {
+  color: var(--timetable-color, #222F3D); /* #222F3D */
+  font-size: 1.5em;
+}
+
+#get-started:hover {
+  cursor: pointer;
+}
+
+/* .home {
+  background: linear-gradient(45deg, #42b34f 0%,#5ba2ad 60%,
+    #72746d 85%,#222f3d 100%);
+} */
+
+
+/**************************************
+ SCHEDULE PAGE
+**************************************/
+
+#schedule-container {
+  height: 200vh;
+  flex-direction: column;
+  align-items: center;
 }
 
 #schedule {
-  position:relative;
+  position: relative;
+  left: -10px;
   display: flex;
   flex-direction: row;
-  background-color: #222F3D;
-  margin: 0;
+  background-color: var(--timetable-color, #222F3D); /* #222F3D */
+  margin: 85px 0 0 0;
   padding: 0;
   padding-bottom: 5px;
   height: 100%;
@@ -63,9 +182,9 @@ h5 {
   height: 97%;
   width: 100%;
   text-align: center;
-  justify-content: flex-start;
-  align-items: baseline;
-  align-content: flex-start;
+  /* justify-content: flex-start; */
+  /* align-items: baseline; */
+  /* align-content: flex-start; */
 }
 
 #schedule-grid {
@@ -175,31 +294,31 @@ h5 {
 }
 
 .shift1 {
-  background-color: #42B34F;
+  background-color: var(--shift-bar-odd-color, #42B34F); /* #42B34F */;
 }
 
 .shift2 {
-  background-color: #5BA2AD;
+  background-color: var(--shift-bar-even-color, #5BA2AD); /* #5BA2AD */;
 }
 
 .shift3 {
-  background-color: #42B34F;
+  background-color: var(--shift-bar-odd-color, #42B34F); /* #42B34F */;
 }
 
 .shift4 {
-  background-color: #5BA2AD;
+  background-color: var(--shift-bar-even-color, #5BA2AD); /* #5BA2AD */;
 }
 
 .shift5 {
-  background-color: #42B34F;
+  background-color: var(--shift-bar-odd-color, #42B34F); /* #42B34F */;
 }
 
 .shift6 {
-  background-color: #5BA2AD;
+  background-color: var(--shift-bar-even-color, #5BA2AD); /* #5BA2AD */;
 }
 
 .shift7 {
-  background-color: #42B34F;
+  background-color: var(--shift-bar-odd-color, #42B34F); /* #42B34F */;
 }
 
 [class*="shift"] {
@@ -211,7 +330,7 @@ h5 {
   float-: none;
   font-size: 2vh;
   font-weight: bold;
-  color: #222F3D;
+  color: var(--timetable-color, #222F3D); /* #222F3D */
   /* border: 1px solid black; */
   padding: 0 5px 5px 5px;
   box-sizing: border-box;         /* Opera/IE 8+ */
@@ -265,91 +384,98 @@ h5 {
   width: 0;
 }
 
-
-/**************************************
- Menu (settings page):
-**************************************/
-
-aside {
-  position: absolute;
-  overflow: hidden;
-  top: 0;
-  background-color: #222F3D;
-  margin: 0;
-  height: 200vh;
-  width: 100vw;
-  opacity: 1;
-  transition: 0.4s;
-  visibility: visible;
-  z-index: 4;
-}
-
-#show-menu, #hide-menu {
-  position: absolute;
-  display: inline;
-  text-align: center;
-  padding: 0;
-  margin: 0;
-  top: 5px;
-  left: 5px;
-  width: 50px;
-  height: 50px;
-  color: #ccc;
-  font-size: 2em;
-  background-color: transparent;
-  border-style: none;
-  outline: none;
-}
-
-#show-menu {
-  transform: scale(1.4, 1.2);
-}
-
-#hide-menu {
-  font-size: 2.3em;
-  top: 3px;
-  left: 15px;
-  font-weight: normal;
-  transform: scaleX(1.3);
-}
-
 section {
   display: inline;
 }
 
-#demo, #save-all, #clear-all, #create-schedule {
-  width: 100px;
-  height: 40px;
-  margin-bottom: 10px;
-  background-color: #5BA2AD;
-  border: solid 1px black;
-  border-radius: 0.25em;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
+
+/**************************************
+ SETTINGS PAGE (MAIN MENU)
+**************************************/
+
+aside {
+  display: block;
+  position: absolute;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  background-color: var(--timetable-color, #222F3D); /* #222F3D */
+  margin: 0;
+  padding-bottom: 10px;
+  min-height: 100vh;
+  width: 100vw;
+  /* -webkit-transition: left 0.5s ease;
+  -moz-transition: left 0.5s ease;
+  -o-transition: left 0.5s ease;
+  transition: left 0.5s ease; */
+  -webkit-transition: transform 0.5s ease;
+  -moz-transition: transform 0.5s ease;
+  -o-transition: transform 0.5s ease;
+  transition: transform 0.5s ease;
+  z-index: 4;
 }
 
-button:hover {
-  cursor: pointer;
+#go-home, #hide-menu-nav, #show-menu-nav {
+  position: absolute;
+  display: inline;
+  padding: 0;
+  margin: 0;
+  /* top: 5px; */
+  bottom: 15px;
+  width: 35px;
+  height: 35px;
+  font-size: 1.8em;
+  color: #ccc;
+  background-color: transparent;
+  border-style: none;
+  outline: none;
+  transform: scale(1.1);
+}
+
+#go-home:hover, #hide-menu-nav:hover, #show-menu-nav:hover {
+  transform: scale(1.2);
+}
+
+#go-home {
+  right: 360px;
+}
+
+#show-menu-nav {
+  right: 320px;
+}
+
+#hide-menu-nav {
+  right: 280px;
+}
+
+#hide-menu-nav:disabled {
+  cursor: default;
+  color: #666;
+}
+
+#show-menu-nav:disabled {
+  cursor: default;
+  color: #666;
 }
 
 
 /**************************************
- SETTING BUTTONS:
+ SETTINGS FORM
 **************************************/
 
-h5 {
+/* h5 {
   display: inline;
   padding: 0;
-}
+} */
 
 .settings {
   display: flex;
   flex-direction: column;
-  background-color: #42B34F;
+  background: linear-gradient(to top, #42B34F, #5BA2AD 80%);
+  /* background-color: #42B34F; */
+  color: #eee;
   width: 500px;
-  margin-top: 50px;
-  margin-left: 50px;
+  margin: 85px 0 0 50px;
   float: left;
 }
 
@@ -376,9 +502,40 @@ fieldset:first-of-type {
   right: 10px;
 }
 
+#demo, #save-all, #clear-all, #create {
+  width: 100px;
+  height: 40px;
+  margin: 10px 10px;
+  background-color: var(--shift-bar-even-color, #5BA2AD); /* #5BA2AD */;
+  border: solid 2px black;
+  border-radius: 0.25em;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+#settings-buttons {
+  position: relative;
+  /* float: left; */
+  margin: 10px auto 10px auto;
+}
+
+#settings-buttons button {
+  font-size: 1.05em;
+  color: #eee;
+}
+
+#settings-buttons button:disabled {
+  color: #aaa;
+}
+
 
 /**************************************
- Show Employee Object on Menu page:
+ DATA OBJECTS ON SETTINGS/MENU PAGE
 **************************************/
 
 #employee-object, #timetable-object {
@@ -387,10 +544,10 @@ fieldset:first-of-type {
   overflow: hidden;
   width: 300px;
   height: 500px;
-  margin: 50px 0 0 50px;
+  margin: 85px 0 0 50px;
   font-size: .8em;
   color: #ccc;
-  border: 1px solid #ccc;
+  border: 2px solid #ccc;
 }
 
 #assigned-shifts-object {
@@ -399,10 +556,10 @@ fieldset:first-of-type {
   overflow: hidden;
   width: 300px;
   height: 500px;
-  margin: 50px 0 0 50px;
+  margin: 85px 0 0 50px;
   font-size: .8em;
   color: #ccc;
-  border: 1px solid #ccc;
+  border: 2px solid #ccc;
 }
 
 h3 {
@@ -437,32 +594,114 @@ h3 {
   padding: 7px;
 }
 
-#settings-buttons {
-  position: relative;
-  float: left;
-  margin: 50px 0 0 50px;
-}
-
 
 /**************************************
- Classes added with JavaScript
+ CLASSES ADDED/REMOVED WITH JS
 **************************************/
 
-.hide {
-  transition: 0.4s;
-  height: 0;
-  visibility: hidden;
+/* Apparently using translate to move elements is more performant than changing positioning, so we'll use translateX instead of changing the left position */
+.left-position-zero { /* used for welcome-page default */
+  left: 0;
 }
 
-.hide2 {
-  transition: 0.4s;
-  opacity: 0;
+.left-position-100 { /* no longer used */
+  left: -100vw;
+}
+
+/* Also, it looks like simply removing the class will reset the position. no need to have */
+.left-translateX-100vw {
+  transform: translateX(-100vw);
+}
+
+/* use these reusable classes instead
+ of setting display in ids. The order here is important as we are toggling display-flex */
+.display-none {
+  display: none;
+}
+
+.display-flex {
+  display: flex;
+}
+
+.display-block {
+  display: block;
 }
 
 
-/**********************************************
- MEDIA QUERIES (WORK IN PROGRESS...):
-**********************************************/
+/***************************************
+ MEDIA QUERIES
+***************************************/
+
+@media (max-width: 1609px) {
+  #assigned-shifts-object {
+    margin: 50px 0 0 50px;
+  }
+}
+
+@media (max-width: 1257px) {
+  #assigned-shifts-object {
+    margin: 50px 0 0 600px;
+  }
+  #timetable-object {
+    margin: 50px 0 0 50px;
+  }
+}
+
+@media (max-width: 980px) {
+  #sessionTimeComponent {
+    display: none;
+  }
+  #go-home {
+    right: 100px;
+  }
+  #show-menu-nav {
+    right: 60px;
+  }
+  #hide-menu-nav {
+    right: 20px;
+  }
+}
+
+@media (max-width: 903px) {
+  #employee-object {
+    margin: 50px 0 0 50px;
+  }
+  #assigned-shifts-object {
+    margin: 50px 0 0 50px;
+  }
+}
+
+@media (max-width: 558px) {
+  .settings {
+    margin-left: calc(100vw - 500px);
+  }
+}
+
+@media (max-width: 508px) {
+  .settings {
+    margin-left: 0;
+    width: 100vw;
+  }
+  fieldset:first-of-type {
+    padding-bottom: 35px;
+  }
+}
+
+@media (max-width: 358px) {
+  #assigned-shifts-object, #timetable-object, #employee-object {
+    margin-left: calc(100vw - 300px);
+  }
+}
+
+@media (max-height: 500px), (max-width: 770px) {
+  #todayDateInstance {
+    display: none;
+  }
+  .h1-nav-bar {
+    position: absolute;
+    left: 20px;
+  }
+}
 
 @media (orientation: portrait) {
   #column-titles, #days-of-week {
@@ -473,5 +712,11 @@ h3 {
 @media (max-aspect-ratio: 4/5) {
   .time {
   transform: rotate(45deg) translateX(-1px) translateY(15px);
+  }
+}
+
+@media (max-height: 640px) {
+  .h1-welcome {
+    margin-top: 50px;
   }
 }
